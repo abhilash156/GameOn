@@ -1,0 +1,22 @@
+{
+  "name": "game-on",
+  "version": "1.0.0",
+  "description": "Project for Web Dev (CS5610)",
+  "main": "server.js",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.1",
+    "multer": "^1.3.0",
+    "q": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Abhilash Kadupatil",
+  "license": "MIT"
+}
