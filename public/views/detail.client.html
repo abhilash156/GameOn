@@ -1,10 +1,23 @@
 <div class="delta-content">
-    <script>
-        alert("smdsf");
-    </script>
-    <h1>Game-On</h1>
-    http://www.giantbomb.com/api/search/?api_key=[YOUR-KEY]&format=json&query="metroid prime"&resources=game
-    <h2>{{model.game.title}}</h2>
-    <img ng-src="{{model.game.url}}">
-    <p>{{model.game.description}}"</p>
+    <div class="container">
+        <h1>Game-On</h1>
+        <ul ng-repeat="game in model.searchResult" class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="visible-lg visible-md col-lg-1 col-md-1"></div>
+                    <div class="col-xs-3 col-lg-3 col-md-3">
+                        <img ng-src="{{model.getImageUrl(game.cover.cloudinary_id)}}" height="320px">
+                    </div>
+                    <div class="col-xs-9 col-lg-7 col-md-7">
+                        <ul>
+                            <li><h3>{{game.name}}</h3></li>
+                            <li><h5>{{game.developers}}</h5></li>
+                        </ul>
+                    </div>
+                    <div class="visible-lg visible-md col-lg-1 col-md-1"></div>
+                </div>
+                {{game}}
+            </li>
+        </ul>
+    </div>
 </div>

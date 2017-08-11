@@ -8,7 +8,8 @@
     "angular-route": "^1.6.5",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "mongoose": "^4.11.1",
+    "igdb-api-node": "^3.0.1",
+    "mongoose": "^4.11.5",
     "multer": "^1.3.0",
     "q": "^1.5.0"
   },

@@ -1,8 +1,8 @@
 (function () {
     angular.module("GameOn")
-        .config(configuration);
+        .config(configurations);
 
-    function configuration($routeProvider) {
+    function configurations($routeProvider) {
         $routeProvider
             .when("/", {
                 templateUrl: "views/detail.client.html",
@@ -12,6 +12,11 @@
             .when("/home", {
                 templateUrl: "views/detail.client.html",
                 controller: "detailController",
+                controllerAs: "model"
+            })
+            .when("/login", {
+                templateUrl: "views/user/templates/login.view.client.html",
+                controller: "loginController",
                 controllerAs: "model"
             })
     }

@@ -6,5 +6,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/public'));
 
+require("./gameon/app");
+
 port = process.env.PORT || 3030;
 app.listen(port);
