@@ -122,6 +122,11 @@ body {
     padding-top: 5px;
 }
 
+.delta-list-icon {
+    color: inherit;
+    padding: 8px;
+}
+
 .glyphicon-cog {
     color: inherit;
 }

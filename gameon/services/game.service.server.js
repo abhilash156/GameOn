@@ -1,6 +1,7 @@
 var app = require("../../express");
 
 var gameModel = require("../model/game/game.model.server");
+var userModel = require("../model/user/user.model.server");
 
 app.post("/api/user/:userId/game", createGame);
 app.get("/api/user/:userId/game", findGamesByUser);
@@ -23,9 +24,10 @@ function createGame(request, response) {
 function findGamesByUser(request, response) {
     var userId = request.params.userId;
 
-    gameModel.findAllGamesForUser(userId)
-        .then(function (games) {
-            response.send(games);
+    userModel.findUserById(userId).populate("games")
+        .exec()
+        .then(function (user) {
+            response.json(user.games);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

@@ -48,9 +48,13 @@
                 <label for="name">Name</label>
                 <input name="Name" placeholder="Blogger" ng-model="model.game.name" class="form-control" id="name"/>
 
+                <label for="cover">Cover</label>
+                <input name="Cover" ng-model="model.game.cover" placeholder="Cover" class="form-control" id="cover"/>
+
                 <label for="description">Description</label>
                 <textarea rows="5" placeholder="Blogger Text" ng-model="model.game.description"
                           class="form-control" id="description"></textarea>
+
                 <a class="btn btn-default btn-danger btn-block" ng-click="model.deleteGame()">Delete</a>
             </div>
         </div>

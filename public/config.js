@@ -33,6 +33,21 @@
                 controller: "gameListController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/liked", {
+                templateUrl: "views/game/templates/game-liked.view.client.html",
+                controller: "gameLikedController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/followed", {
+                templateUrl: "views/game/templates/user-followed.view.client.html",
+                controller: "userFollowedController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/followers", {
+                templateUrl: "views/game/templates/user-followers.view.client.html",
+                controller: "userFollowersController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/game/new", {
                 templateUrl: "views/game/templates/game-new.view.client.html",
                 controller: "newGameController",

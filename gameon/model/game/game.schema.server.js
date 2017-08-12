@@ -1,10 +1,11 @@
 var mongoose = require("mongoose");
 
 var gameSchema = mongoose.Schema({
-    _user: {type : mongoose.Schema.Types.ObjectId, ref: "UserModel"},
     name: String,
     description: String,
-    pages: [{type : mongoose.Schema.Types.ObjectId, ref: "PageModel"}],
+    cover: String,
+    externalId: {type: String, unique: true},
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "game"});
 

@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require("q").Promise;
 
-var connectionString = "mongodb://52.15.130.243:27017/WebAppMaker";
+var connectionString = "mongodb://52.15.130.243:27017/GameOn";
 
 if (process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
