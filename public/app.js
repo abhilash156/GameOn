@@ -1,3 +1,3 @@
 (function () {
-    angular.module("GameOn", ["ngRoute"]);
+    angular.module("WebAppMaker", ["ngRoute", "wbdvDirectives", "textAngular"]);
 })();

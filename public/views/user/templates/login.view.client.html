@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="delta-login row">
+        <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+        <div class="col-xs-12 col-lg-8 col-md-10">
+            <div ng-show="model.errorMessage" class="alert alert-danger">
+                {{ model.errorMessage }}
+            </div>
+
+            <h2 class="heading">Login</h2>
+            <input id="inputUsername"
+                   ng-model="model.user.username"
+                   class="form-control"
+                   placeholder="Username"
+                   required autofocus>
+            <input type="password"
+                   ng-model="model.user.password"
+                   id="inputPassword"
+                   class="form-control"
+                   placeholder="Password"
+                   required>
+            <a class="btn btn-primary btn-block" ng-click="model.login(model.user)" type="submit">Login</a>
+            <a class="btn btn-success btn-block" type="submit" href="#!/register">Register</a>
+        </div>
+        <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+    </div>
+</div>

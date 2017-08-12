@@ -1,0 +1,38 @@
+<div class="delta-content">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row delta-margin-top">
+                <div class="col-lg-1 col-xs-2 pull-left">
+                    <p class="accent-text pull-left"><b>Profile</b></p>
+                </div>
+                <div class="col-lg-1 col-xs-2 pull-right">
+                    <a ng-click="model.updateUser(model.user)" role="button" type="submit">
+                        <span class="glyphicon glyphicon-ok pull-right"></span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2 class="heading">Profile</h2>
+        <label>Username</label>
+        <input class="form-control" placeholder="Username" ng-model="model.user.username">
+        <label>Email</label>
+        <input type="email" ng-model="model.user.email" class="form-control" placeholder="Email"/>
+        <label>First Name</label>
+        <input class="form-control" ng-model="model.user.firstName" placeholder="First Name"/>
+        <label>Last Name</label>
+        <input class="form-control" ng-model="model.user.lastName" placeholder="Last Name"/>
+        <a class="btn btn-primary btn-block" href="#!/user/{{model.user._id}}/website"><b>Website</b></a>
+        <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model.user._id)"><b>Delete</b></a>
+        <a class="btn btn-danger btn-block" href="#!/login"><b>Logout</b></a>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="row delta-margin-top">
+                <div class="col-lg-1 col-xs-2 pull-right">
+                    <a href="#!/user/{{model.user._id}}"><span class="glyphicon glyphicon-user pull-right"></span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

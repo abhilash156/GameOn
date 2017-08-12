@@ -1,0 +1,41 @@
+.name-tag {
+    font-family: 'Dosis', sans-serif;
+    font-size: 128px;
+    line-height: 128px;
+    font-weight: 200;
+    margin-bottom: 24px;
+    z-index: 10;
+    color: #fff;
+}
+
+body {
+    margin-top: 100px;
+    background-image: url("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-337265.png");
+    /*background-image: url("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-265977.png");*/
+    background-size: 100%;
+}
+
+.icon {
+    font-size: 48px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 24px;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+
+}
+
+a:hover {
+    -webkit-transition: 0.15s;
+    transition: 0.15s;
+    color: #fff!important;
+    opacity: 1;
+    outline: none!important;
+    text-decoration: none!important;
+    text-shadow: 0 0 1ex #fff, 0 0 4px #fff;
+}

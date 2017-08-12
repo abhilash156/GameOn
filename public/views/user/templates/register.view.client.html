@@ -1,0 +1,18 @@
+<div class="container-fluid">
+
+    <div class="delta-login">
+        <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+        <div class="col-xs-12 col-lg-8 col-md-10">
+            <div ng-show="model.errorMessage" class="alert alert-danger">
+                {{ model.errorMessage }}
+            </div>
+            <h2 class="heading">Register</h2>
+            <input class="form-control" ng-model="model.user.username" placeholder="Username"/>
+            <input type="password" ng-model="model.user.password" class="form-control" placeholder="Password"/>
+            <input type="password" ng-model="model.vPassword" class="form-control" placeholder="Verify Password"/>
+            <a class="btn btn-primary btn-block" ng-click="model.registerUser(model.user, model.vPassword)">Register</a>
+            <a class="btn btn-danger  btn-block" href="#!/login">Cancel</a>
+        </div>
+        <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+    </div>
+</div>
