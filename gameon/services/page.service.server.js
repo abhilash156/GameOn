@@ -2,17 +2,17 @@ var app = require("../../express");
 
 var pageModel = require("../model/page/page.model.server");
 
-app.post("/api/website/:websiteId/page", createPage);
-app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
+app.post("/api/game/:gameId/page", createPage);
+app.get("/api/game/:gameId/page", findAllPagesForGame);
 app.get("/api/page/:pageId", findPageById);
 app.put("/api/page/:pageId", updatePage);
 app.delete("/api/page/:pageId", deletePage);
 
 function createPage(request, response) {
-    var websiteId = request.params.websiteId;
+    var gameId = request.params.gameId;
     var page = request.body;
 
-    pageModel.createPage(websiteId, page)
+    pageModel.createPage(gameId, page)
         .then(function (newPage) {
             response.send(newPage);
         }, function (error) {
@@ -20,10 +20,10 @@ function createPage(request, response) {
         });
 }
 
-function findAllPagesForWebsite(request, response) {
-    var websiteId = request.params.websiteId;
+function findAllPagesForGame(request, response) {
+    var gameId = request.params.gameId;
 
-    pageModel.findAllPagesForWebsite(websiteId)
+    pageModel.findAllPagesForGame(gameId)
         .then(function (pages) {
             response.send(pages);
         }, function (error) {

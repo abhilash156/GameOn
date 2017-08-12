@@ -12,8 +12,8 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-userModel.addWebsite = addWebsite;
-userModel.removeWebsite = removeWebsite;
+userModel.addGame = addGame;
+userModel.removeGame = removeGame;
 
 module.exports = userModel;
 
@@ -21,19 +21,19 @@ function createUser(user) {
     return userModel.create(user);
 }
 
-function addWebsite(userId, websiteId) {
+function addGame(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
-            user.websites.push(websiteId);
+            user.games.push(gameId);
             return user.save();
         })
 }
 
-function removeWebsite(userId, websiteId) {
+function removeGame(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
+            var index = user.games.indexOf(gameId);
+            user.games.splice(index, 1);
             return user.save();
         })
 }

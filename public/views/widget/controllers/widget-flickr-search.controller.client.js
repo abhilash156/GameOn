@@ -9,7 +9,7 @@
         model.selectPhoto = selectPhoto;
 
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
         model.widgetId = $routeParams["wgid"];
 
@@ -30,11 +30,11 @@
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
 
             var widget = widgetService.findWidgetById(model.widgetId);
-            //websiteId, pageId, widgetId, {url: url}
+            //gameId, pageId, widgetId, {url: url}
             widget.url = url;
             widgetService.updateWidget(model.widgetId, widget)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page/" + model.pageId
                         + "/widget/" + model.widgetId);
                 })
 

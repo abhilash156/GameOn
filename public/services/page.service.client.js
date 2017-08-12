@@ -4,21 +4,21 @@
     function pageService($http) {
         var api = {
             "createPage": createPage,
-            "findPageByWebsiteId": findPageByWebsiteId,
+            "findPageByGameId": findPageByGameId,
             "findPageById": findPageById,
             "updatePage": updatePage,
             "deletePage": deletePage
         };
         return api;
 
-        function createPage(websiteId, page) {
-            var url = "/api/website/" + websiteId + "/page";
+        function createPage(gameId, page) {
+            var url = "/api/game/" + gameId + "/page";
 
             return $http.post(url, page).then(successCallback, errorCallback);
         }
 
-        function findPageByWebsiteId(websiteId) {
-            var url = "/api/website/" + websiteId + "/page";
+        function findPageByGameId(gameId) {
+            var url = "/api/game/" + gameId + "/page";
 
             return $http.get(url).then(successCallback, errorCallback);
         }

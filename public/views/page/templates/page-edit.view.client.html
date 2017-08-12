@@ -3,19 +3,19 @@
         <div class="container-fluid">
             <div class="row delta-margin-top">
                 <div class="col-xs-1 pull-left">
-                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page"><span
+                    <a href="#!/user/{{model.userId}}/game/{{model.gameId}}/page"><span
                             class="glyphicon glyphicon-chevron-left pull-left"></span></a>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <p class="accent-text pull-left"><b>Websites</b></p>
+                    <p class="accent-text pull-left"><b>Games</b></p>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new"><span
+                    <a href="#!/user/{{model.userId}}/game/{{model.gameId}}/page/new"><span
                             class="glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
                 <div class="col-lg-2">
-                    <p class="accent-text pull-left"><b>Edit Website</b></p>
+                    <p class="accent-text pull-left"><b>Edit Game</b></p>
                 </div>
 
                 <div class="col-lg-1 pull-right">
@@ -34,10 +34,10 @@
                     <li ng-repeat="page in model.pages" class="list-group-item">
                         <div class="row">
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget"><b>{{page.name}}</b></a>
+                                <a href="#!/user/{{model.userId}}/game/{{model.gameId}}/page/{{page._id}}/widget"><b>{{page.name}}</b></a>
                             </div>
                             <div class="col-xs-2">
-                                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}"><span
+                                <a href="#!/user/{{model.userId}}/game/{{model.gameId}}/page/{{page._id}}"><span
                                         class="glyphicon glyphicon-cog pull-right"></span></a>
                             </div>
                         </div>

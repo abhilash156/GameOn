@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var pageSchema = mongoose.Schema({
-    _website: {type : mongoose.Schema.Types.ObjectId, ref: "WebsiteModel"},
+    _game: {type : mongoose.Schema.Types.ObjectId, ref: "GameModel"},
     name: String,
     title: String,
     description: String,

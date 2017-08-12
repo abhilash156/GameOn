@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="WebAppMaker">
 <head>
-    <title>CS5610 Web Application</title>
-    <!--<script src="../vendor/angular/angular.js"></script>-->
+    <title>GameOn</title>
     <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">-->
 
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">-->
     <!--<link href="../vendor/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
-   <!-- <link href="../vendor/angular/textAngular/textAngular.css" rel="stylesheet">-->
+    <!--<link href="../vendor/angular/textAngular/textAngular.css" rel="stylesheet">-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -22,11 +21,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular-sanitize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.min.js"></script>
 
-
     <script src="app.js"></script>
     <script src="config.js"></script>
     <script src="services/user.service.client.js"></script>
-    <script src="services/website.service.client.js"></script>
+    <script src="services/game.service.client.js"></script>
     <script src="services/widget.service.client.js"></script>
     <script src="services/page.service.client.js"></script>
     <script src="services/flickr.service.client.js"></script>
@@ -35,9 +33,9 @@
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/user/controllers/register.controller.client.js"></script>
 
-    <script src="views/website/controllers/website-list.controller.client.js"></script>
-    <script src="views/website/controllers/website-edit.controller.client.js"></script>
-    <script src="views/website/controllers/website-new.controller.client.js"></script>
+    <script src="views/game/controllers/game-list.controller.client.js"></script>
+    <script src="views/game/controllers/game-edit.controller.client.js"></script>
+    <script src="views/game/controllers/game-new.controller.client.js"></script>
 
     <script src="views/page/controllers/page-edit.controller.client.js"></script>
     <script src="views/page/controllers/page-list.controller.client.js"></script>
@@ -49,17 +47,11 @@
     <script src="views/widget/controllers/widget-flickr-search.controller.client.js"></script>
     <script src="directives/wbdv-sortable.js"></script>
 
-
-    <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">-->
     <link href="css/stylesheet.css" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.css" rel="stylesheet">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<script src="../vendor/angular/textAngular/textAngular-rangy.min.js"></script>
-    <script src="../vendor/angular/textAngular/textAngular-sanitize.min.js"></script>
-
-    <script src="../vendor/angular/textAngular/textAngular.min.js"></script>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>

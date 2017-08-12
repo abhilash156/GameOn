@@ -3,12 +3,12 @@ var pageSchema = require("./page.schema.server");
 mongoose.Promise = require("q").Promise;
 
 var pageModel = mongoose.model("PageModel", pageSchema);
-var websiteModel = require("../website/website.model.server");
+var gameModel = require("../game/game.model.server");
 
 require("../models.server");
 
 pageModel.createPage = createPage;
-pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+pageModel.findAllPagesForGame = findAllPagesForGame;
 pageModel.findPageById = findPageById;
 pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
@@ -26,7 +26,7 @@ function addWidget(pageId, widgetId) {
 }
 
 function removeWidget(pageId, widgetId) {
-    return websiteModel.findById(pageId)
+    return gameModel.findById(pageId)
         .then(function (page) {
             var index = page.widgets.indexOf(widgetId);
             page.widgets.splice(index, 1);
@@ -34,16 +34,16 @@ function removeWidget(pageId, widgetId) {
         })
 }
 
-function createPage(websiteId, page) {
-    page._website = websiteId;
+function createPage(gameId, page) {
+    page._game = gameId;
     return pageModel.create(page)
         .then(function (newPage) {
-        return websiteModel.addPage(websiteId, newPage._id);
+        return gameModel.addPage(gameId, newPage._id);
     });
 }
 
-function findAllPagesForWebsite(websiteId) {
-    return pageModel.find({"_website": websiteId});
+function findAllPagesForGame(gameId) {
+    return pageModel.find({"_game": gameId});
 }
 
 function findPageById(pageId) {
@@ -53,7 +53,7 @@ function findPageById(pageId) {
 
 function updatePage(pageId, page) {
 
-    delete page._website;
+    delete page._game;
     delete page.dateCreated;
     return pageModel.update({_id: pageId}, {$set: page});
 }
@@ -63,7 +63,7 @@ function deletePage(pageId) {
         .then(function (page) {
             return pageModel.remove({_id: pageId})
                 .then(function () {
-                    return websiteModel.removePage(page._website, pageId);
+                    return gameModel.removePage(page._game, pageId);
                 });
         });
 }

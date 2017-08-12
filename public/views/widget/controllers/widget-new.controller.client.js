@@ -7,7 +7,7 @@
         var model = this;
         model.createWidget = createWidget;
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
 
         function init() {
@@ -22,7 +22,7 @@
 
             widgetService.createWidget(model.pageId, widget)
                 .then(function (newWidget) {
-                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId
+                    $location.url("/user/" + model.userId + "/game/" + model.gameId + "/page/" + model.pageId
                         + "/widget/" + newWidget._id);
                 });
         }

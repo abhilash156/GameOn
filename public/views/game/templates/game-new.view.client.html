@@ -3,23 +3,23 @@
         <div class="container-fluid">
             <div class="row delta-margin-top">
                 <div class="col-xs-1 pull-left">
-                    <a href="#!/user/{{model.userId}}/website"><span
+                    <a href="#!/user/{{model.userId}}/game"><span
                             class="glyphicon glyphicon-chevron-left pull-left"></span></a>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <p class="accent-text pull-left"><b>Websites</b></p>
+                    <p class="accent-text pull-left"><b>Games</b></p>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <a href="#!/user/{{model.userId}}/website/new"><span
+                    <a href="#!/user/{{model.userId}}/game/new"><span
                             class="glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
                 <div class="col-lg-2">
-                    <p class="accent-text pull-left"><b>New Website</b></p>
+                    <p class="accent-text pull-left"><b>New Game</b></p>
                 </div>
 
                 <div class="col-lg-1 pull-right">
-                    <a ng-click="model.createWebsite(model.website)" role="button"><span
+                    <a ng-click="model.createGame(model.game)" role="button"><span
                             class="glyphicon glyphicon-ok pull-right"></span></a>
                 </div>
             </div>
@@ -30,13 +30,13 @@
         <div class="row">
             <div class="visible-lg col-lg-3">
                 <ul class="list-group">
-                    <li ng-repeat="website in model.websites" class="list-group-item">
+                    <li ng-repeat="game in model.games" class="list-group-item">
                         <div class="row">
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.userId}}/website/{{website._id}}/page"><b>{{website.name}}</b></a>
+                                <a href="#!/user/{{model.userId}}/game/{{game._id}}/page"><b>{{game.name}}</b></a>
                             </div>
                             <div class="col-xs-2">
-                                <a href="#!/user/{{model.userId}}/website/{{website._id}}"><span
+                                <a href="#!/user/{{model.userId}}/game/{{game._id}}"><span
                                         class="glyphicon glyphicon-cog pull-right"></span></a>
                             </div>
                         </div>
@@ -45,11 +45,11 @@
             </div>
             <div class="col-xs-12 col-lg-9">
                 <label for="name">Name</label>
-                <input name="Name" ng-model="model.website.name" placeholder="Name" class="form-control" id="name"/>
+                <input name="Name" ng-model="model.game.name" placeholder="Name" class="form-control" id="name"/>
 
                 <label for="description">Description</label>
                 <textarea rows="5" placeholder="Description" class="form-control"
-                          id="description" ng-model="model.website.description"></textarea>
+                          id="description" ng-model="model.game.description"></textarea>
             </div>
         </div>
     </div>

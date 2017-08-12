@@ -9,11 +9,11 @@
         model.deletePage = deletePage;
 
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
 
         function init() {
-            pageService.findPageByWebsiteId(model.websiteId)
+            pageService.findPageByGameId(model.gameId)
                 .then(function (pages) {
                     model.pages = pages;
                 });
@@ -28,14 +28,14 @@
         function updatePage(page) {
             pageService.updatePage(model.pageId, page)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page");
                 });
         }
 
         function deletePage() {
             pageService.deletePage(model.pageId)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page");
                 });
         }
     }

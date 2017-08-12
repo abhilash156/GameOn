@@ -7,10 +7,10 @@
         var model = this;
         model.createPage = createPage;
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
 
         function init() {
-            pageService.findPageByWebsiteId(model.websiteId)
+            pageService.findPageByGameId(model.gameId)
                 .then(function (pages) {
                     model.pages = pages;
                 });
@@ -19,9 +19,9 @@
         init();
 
         function createPage(page) {
-            pageService.createPage(model.websiteId, page)
+            pageService.createPage(model.gameId, page)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page");
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page");
                 });
         }
     }

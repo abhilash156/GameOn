@@ -91,7 +91,7 @@ function uploadImage(request, response) {
     var myFile = request.file;
 
     var userId = request.body.userId;
-    var websiteId = request.body.websiteId;
+    var gameId = request.body.gameId;
     var pageId = request.body.pageId;
 
     var filename = myFile.filename;
@@ -100,7 +100,7 @@ function uploadImage(request, response) {
         .then(function (widget) {
             widget.url = '/assignment/uploads/' + filename;
             widget.width = width;
-            var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId
+            var callbackUrl = "/assignment/#!/user/" + userId + "/game/" + gameId + "/page/" + pageId
                 + "/widget/" + widgetId;
             response.redirect(callbackUrl);
         });

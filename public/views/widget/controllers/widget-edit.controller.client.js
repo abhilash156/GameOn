@@ -11,7 +11,7 @@
         model.deleteWidget = deleteWidget;
 
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
         model.widgetId = $routeParams["wgid"];
 
@@ -31,14 +31,14 @@
         function updateWidget(widget) {
             widgetService.updateWidget(model.widgetId, widget)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page/" + model.pageId + "/widget");
                 });
         }
 
         function deleteWidget() {
             widgetService.deleteWidget(model.widgetId)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                    $location.url("user/" + model.userId + "/game/" + model.gameId + "/page/" + model.pageId + "/widget");
                 });
         }
     }

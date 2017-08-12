@@ -7,7 +7,7 @@
         var model = this;
 
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
 
         model.trustThisContent = trustThisContent;

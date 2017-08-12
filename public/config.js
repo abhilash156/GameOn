@@ -28,52 +28,52 @@
                 controller: "profileController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website", {
-                templateUrl: "views/website/templates/website-list.view.client.html",
-                controller: "websiteListController",
+            .when("/user/:uid/game", {
+                templateUrl: "views/game/templates/game-list.view.client.html",
+                controller: "gameListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/new", {
-                templateUrl: "views/website/templates/website-new.view.client.html",
-                controller: "newWebsiteController",
+            .when("/user/:uid/game/new", {
+                templateUrl: "views/game/templates/game-new.view.client.html",
+                controller: "newGameController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid", {
-                templateUrl: "views/website/templates/website-edit.view.client.html",
-                controller: "editWebsiteController",
+            .when("/user/:uid/game/:wid", {
+                templateUrl: "views/game/templates/game-edit.view.client.html",
+                controller: "editGameController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page", {
+            .when("/user/:uid/game/:wid/page", {
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "pageListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/new", {
+            .when("/user/:uid/game/:wid/page/new", {
                 templateUrl: "views/page/templates/page-new.view.client.html",
                 controller: "newPageController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid", {
+            .when("/user/:uid/game/:wid/page/:pid", {
                 templateUrl: "views/page/templates/page-edit.view.client.html",
                 controller: "editPageController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget", {
+            .when("/user/:uid/game/:wid/page/:pid/widget", {
                 templateUrl: "views/widget/templates/widget-list.view.client.html",
                 controller: "widgetListController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new", {
+            .when("/user/:uid/game/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/templates/widget-chooser.view.client.html",
                 controller: "newWidgetController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
+            .when("/user/:uid/game/:wid/page/:pid/widget/:wgid", {
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "editWidgetController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/search", {
+            .when("/user/:uid/game/:wid/page/:pid/widget/:wgid/search", {
                 templateUrl: "views/widget/templates/widget-flickr-search.view.client.html",
                 controller: "flickrImageSearchController",
                 controllerAs: "model"

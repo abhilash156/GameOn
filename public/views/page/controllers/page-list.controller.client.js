@@ -7,10 +7,10 @@
         var model = this;
 
         model.userId = $routeParams["uid"];
-        model.websiteId = $routeParams["wid"];
+        model.gameId = $routeParams["wid"];
 
         function init() {
-            pageService.findPageByWebsiteId(model.websiteId)
+            pageService.findPageByGameId(model.gameId)
                 .then(function (pages) {
                     model.pages = pages;
                 });
