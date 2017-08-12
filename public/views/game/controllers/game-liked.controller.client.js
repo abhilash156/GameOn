@@ -9,7 +9,7 @@
         model.userId = $routeParams["uid"];
 
         function init() {
-            gameService.findGamesByUser(model.userId)
+            gameService.findLikedGamesByUser(model.userId)
                 .then(function (games) {
                     model.games = games;
                 });

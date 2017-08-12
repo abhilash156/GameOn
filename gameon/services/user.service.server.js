@@ -7,7 +7,10 @@ app.get("/api/user", findUserByCredentials);
 app.get("/api/user/:userId", findUserById);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
-
+app.get("/api/user/:userId/game", findGamesByUser);
+app.get("/api/user/:userId/liked", findLikedGamesByUser);
+app.get("/api/user/:userId/following", getFollowing);
+app.get("/api/user/:userId/followers", getFollowers);
 
 function createUser(request, response) {
     var user = request.body;
@@ -81,6 +84,54 @@ function deleteUser(request, response) {
     userModel.deleteUser(userId)
         .then(function () {
             response.sendStatus(200);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function findGamesByUser(request, response) {
+    var userId = request.params.userId;
+
+    userModel.findUserById(userId).populate("games")
+        .exec()
+        .then(function (user) {
+            response.json(user.games);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function findLikedGamesByUser(request, response) {
+    var userId = request.params.userId;
+
+    userModel.findUserById(userId).populate("liked")
+        .exec()
+        .then(function (user) {
+            response.json(user.games);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function getFollowing(request, response) {
+    var userId = request.params.userId;
+
+    userModel.findUserById(userId).populate("following")
+        .exec()
+        .then(function (user) {
+            response.json(user.games);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function getFollowers(request, response) {
+    var userId = request.params.userId;
+
+    userModel.findUserById(userId).populate("followers")
+        .exec()
+        .then(function (user) {
+            response.json(user.games);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

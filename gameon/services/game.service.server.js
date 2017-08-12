@@ -1,10 +1,8 @@
 var app = require("../../express");
 
 var gameModel = require("../model/game/game.model.server");
-var userModel = require("../model/user/user.model.server");
 
 app.post("/api/user/:userId/game", createGame);
-app.get("/api/user/:userId/game", findGamesByUser);
 app.get("/api/game/:gameId", findGameById);
 app.put("/api/game/:gameId", updateGame);
 app.delete("/api/game/:gameId", deleteGame);
@@ -16,18 +14,6 @@ function createGame(request, response) {
     gameModel.createGameForUser(userId, game)
         .then(function (newGame) {
             response.send(newGame);
-        }, function (error) {
-            response.sendStatus(404).error(error);
-        });
-}
-
-function findGamesByUser(request, response) {
-    var userId = request.params.userId;
-
-    userModel.findUserById(userId).populate("games")
-        .exec()
-        .then(function (user) {
-            response.json(user.games);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

@@ -5,6 +5,9 @@
         var api = {
             "createGame": createGame,
             "findGamesByUser": findGamesByUser,
+            "findLikedGamesByUser": findLikedGamesByUser,
+            "getFollowers": getFollowers,
+            "getFollowing": getFollowing,
             "findGameById": findGameById,
             "updateGame": updateGame,
             "deleteGame": deleteGame
@@ -20,6 +23,24 @@
 
         function findGamesByUser(userId) {
             var url = "/api/user/" + userId + "/game";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function findLikedGamesByUser(userId) {
+            var url = "/api/user/" + userId + "/liked";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getFollowers(userId) {
+            var url = "/api/user/" + userId + "/followers";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getFollowing(userId) {
+            var url = "/api/user/" + userId + "/following";
 
             return $http.get(url).then(successCallback, errorCallback);
         }
