@@ -1,5 +1,5 @@
 (function () {
-    angular.module("WebAppMaker").config(configuration);
+    angular.module("GameOn").config(configuration);
 
     function configuration($routeProvider) {
         $routeProvider

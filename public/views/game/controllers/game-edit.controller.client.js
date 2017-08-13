@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("editGameController", editGameController);
 
     function editGameController($routeParams, gameService, $location) {

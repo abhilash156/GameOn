@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("registerController", registerController);
 
     function registerController(userService, $location) {

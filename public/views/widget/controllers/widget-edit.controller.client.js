@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("editWidgetController", editWidgetController);
 
     function editWidgetController($routeParams, widgetService, $location) {

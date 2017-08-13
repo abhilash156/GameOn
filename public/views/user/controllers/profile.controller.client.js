@@ -1,18 +1,18 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("profileController", profileController);
 
     function profileController($routeParams, userService, $location) {
         var model = this;
 
-        var userId = $routeParams["uid"];
+        model.userId = $routeParams["uid"];
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
         function init() {
-            userService.findUserById(userId)
+            userService.findUserById(model.userId)
                 .then(function (user) {
                     model.user = user;
                 });
@@ -21,9 +21,9 @@
         init();
 
         function updateUser(user) {
-            userService.updateUser(userId, user)
+            userService.updateUser(model.userId, user)
                 .then(function () {
-                    $location.url("user/" + userId);
+                    $location.url("user/" + model.userId);
                 });
         }
 

@@ -1,5 +1,5 @@
 (function () {
-    angular.module("WebAppMaker").factory("flickrService", flickrService);
+    angular.module("GameOn").factory("flickrService", flickrService);
 
     function flickrService($http) {
         var key = "ce1634722d033536838c4f745bcc2807";

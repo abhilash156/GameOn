@@ -1,5 +1,5 @@
 (function () {
-    angular.module("WebAppMaker").factory("pageService", pageService);
+    angular.module("GameOn").factory("pageService", pageService);
 
     function pageService($http) {
         var api = {

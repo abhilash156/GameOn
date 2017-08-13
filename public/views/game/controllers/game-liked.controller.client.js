@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("gameLikedController", gameListController);
 
     function gameListController($routeParams, gameService) {

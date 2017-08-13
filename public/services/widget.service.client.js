@@ -1,5 +1,5 @@
 (function () {
-    angular.module("WebAppMaker").factory("widgetService", widgetService);
+    angular.module("GameOn").factory("widgetService", widgetService);
 
     function widgetService($http) {
         var api = {

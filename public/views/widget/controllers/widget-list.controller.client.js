@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("widgetListController", widgetListController);
 
     function widgetListController($routeParams, widgetService, $sce) {

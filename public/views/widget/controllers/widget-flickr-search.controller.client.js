@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("WebAppMaker")
+        .module("GameOn")
         .controller("flickrImageSearchController", flickrImageSearchController);
 
     function flickrImageSearchController(flickrService, $routeParams, widgetService, $location) {

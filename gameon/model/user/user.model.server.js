@@ -38,10 +38,6 @@ function removeGame(userId, gameId) {
         })
 }
 
-function findAllUsers() {
-    return userModel.find();
-}
-
 function findUserById(userId) {
 
     return userModel.findById(userId);
