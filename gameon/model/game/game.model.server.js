@@ -14,6 +14,8 @@ gameModel.updateGame = updateGame;
 gameModel.deleteGame = deleteGame;
 gameModel.addPage = addPage;
 gameModel.removePage = removePage;
+gameModel.addLike = addLike;
+gameModel.removeLike = removeLike;
 
 module.exports = gameModel;
 
@@ -68,7 +70,6 @@ function findGameByExternalId(externalId) {
 
 function updateGame(gameId, game) {
 
-    delete game._user;
     delete game.dateCreated;
     return gameModel.update({_id: gameId}, {$set: game});
 }

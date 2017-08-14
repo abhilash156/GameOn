@@ -73,25 +73,5 @@
                 controller: "editPageController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/game/:wid/page/:pid/widget", {
-                templateUrl: "views/widget/templates/widget-list.view.client.html",
-                controller: "widgetListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/game/:wid/page/:pid/widget/new", {
-                templateUrl: "views/widget/templates/widget-chooser.view.client.html",
-                controller: "newWidgetController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/game/:wid/page/:pid/widget/:wgid", {
-                templateUrl: "views/widget/templates/widget-edit.view.client.html",
-                controller: "editWidgetController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/game/:wid/page/:pid/widget/:wgid/search", {
-                templateUrl: "views/widget/templates/widget-flickr-search.view.client.html",
-                controller: "flickrImageSearchController",
-                controllerAs: "model"
-            })
     }
 })();

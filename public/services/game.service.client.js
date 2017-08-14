@@ -12,6 +12,7 @@
             "isFollowing": isFollowing,
             "isFollower": isFollower,
             "isLiked": isLiked,
+            "isOwned": isOwned,
             "findGameById": findGameById,
             "updateGame": updateGame,
             "deleteGame": deleteGame,
@@ -77,6 +78,12 @@
 
         function isLiked(userId, gameId) {
             var url = "/api/user/" + userId + "/liked/" + gameId;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isOwned(userId, gameId) {
+            var url = "/api/user/" + userId + "/games/" + gameId;
 
             return $http.get(url).then(successCallback, errorCallback);
         }

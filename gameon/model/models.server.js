@@ -9,5 +9,17 @@ if (process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var connectionUrl = process.env.MLAB_CONNECTION_URL;
     connectionString = 'mongodb://' + username + ':' + password + connectionUrl;
 }
+var dbConnection = mongoose.connect(connectionString, {useMongoClient: true});
+module.exports = dbConnection;
 
-module.exports = mongoose.connect(connectionString, {useMongoClient: true});
+mongoose.connection.on('connected', function () {
+    console.log("Connected to MongoDB");
+});
+
+mongoose.connection.on('error',function (err) {
+    console.log("Error : couldn't connect to MongoDB " + err);
+});
+
+mongoose.connection.on('disconnected', function () {
+    console.log("Disconnected from MongoDB");
+});

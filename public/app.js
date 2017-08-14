@@ -1,3 +1,3 @@
 (function () {
-    angular.module("GameOn", ["ngRoute", "wbdvDirectives", "textAngular"]);
+    angular.module("GameOn", ["ngRoute", "textAngular"]);
 })();

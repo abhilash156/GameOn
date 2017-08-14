@@ -15,18 +15,23 @@
         model.unLikeGame = unLikeGame;
 
         function init() {
-            gameService.findGameById(model.gameId)
+            /*gameService.findGameById(model.gameId)
                 .then(function (game) {
                     model.game = game;
                     giantBombService.getGameById(game.externalId)
                         .then(function (gameData) {
                             model.gameInfo = gameData.results;
                         });
-                });
+                });*/
 
             gameService.isLiked(model.userId, model.gameId)
                 .then(function (value) {
                     model.liked = value;
+                });
+
+            gameService.isOwned(model.userId, model.gameId)
+                .then(function (value) {
+                    model.owned = value;
                 });
         }
 
@@ -56,7 +61,7 @@
                 });
         }
 
-        model.gameInfo2 = {
+        model.gameInfo = {
             "aliases": null,
             "api_detail_url": "https://www.giantbomb.com/api/game/3030-49973/",
             "date_added": "2015-06-15 19:21:55",
