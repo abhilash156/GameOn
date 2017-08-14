@@ -7,8 +7,8 @@ var userModel = require("../user/user.model.server");
 
 require("../models.server");
 
-gameModel.createGameForUser = createGameForUser;
-gameModel.findAllGamesForUser = findAllGamesForUser;
+gameModel.createGame = createGame;
+gameModel.findGameByExternalId = findGameByExternalId;
 gameModel.findGameById = findGameById;
 gameModel.updateGame = updateGame;
 gameModel.deleteGame = deleteGame;
@@ -34,21 +34,19 @@ function removePage(gameId, pageId) {
         })
 }
 
-function createGameForUser(userId, game) {
-    game._user = userId;
-    return gameModel.create(game)
-        .then(function (newGame) {
-            return userModel.addGame(userId, newGame._id);
-        });
-}
+function createGame(game) {
 
-function findAllGamesForUser(userId) {
-    return gameModel.find({"_user": userId});
+    return gameModel.create(game);
 }
 
 function findGameById(gameId) {
 
     return gameModel.findById(gameId);
+}
+
+function findGameByExternalId(externalId) {
+
+    return gameModel.find({"externalId": externalId});
 }
 
 function updateGame(gameId, game) {

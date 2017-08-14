@@ -2,16 +2,16 @@ var app = require("../../express");
 
 var gameModel = require("../model/game/game.model.server");
 
-app.post("/api/user/:userId/game", createGame);
+app.post("/api/game", createGame);
 app.get("/api/game/:gameId", findGameById);
+app.get("/api/game", findGameByExternalId);
 app.put("/api/game/:gameId", updateGame);
 app.delete("/api/game/:gameId", deleteGame);
 
 function createGame(request, response) {
-    var userId = request.params.userId;
     var game = request.body;
 
-    gameModel.createGameForUser(userId, game)
+    gameModel.createGame(game)
         .then(function (newGame) {
             response.send(newGame);
         }, function (error) {
@@ -48,6 +48,21 @@ function deleteGame(request, response) {
     gameModel.deleteGame(gameId)
         .then(function () {
             response.sendStatus(200);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function findGameByExternalId(request, response) {
+    var externalId = request.query.externalId;
+
+    gameModel.findGameByExternalId(externalId)
+        .then(function (game) {
+            if (game.length === 0) {
+                response.sendStatus(503);
+            } else {
+                response.send(game);
+            }
         }, function (error) {
             response.sendStatus(404).error(error);
         });

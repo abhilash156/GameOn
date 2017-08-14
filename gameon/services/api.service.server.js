@@ -34,9 +34,8 @@ function redirectIG(request, response) {
 
 function redirectGB(request, response) {
     var body = request.body;
-    console.log(body);
     if (body.requestType === "GET") {
-        var url = body.requestURL;
+        var url = encodeURI(body.requestURL);
 
         https.get({
             host: 'www.giantbomb.com',
@@ -48,7 +47,7 @@ function redirectGB(request, response) {
                 resultBody += d;
             });
             apiResponse.on('end', function () {
-                response.send(JSON.parse(resultBody));
+                response.send(resultBody);
             });
         })
     } else {

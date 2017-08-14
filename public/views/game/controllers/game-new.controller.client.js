@@ -18,7 +18,7 @@
         init();
 
         function createGame(game) {
-            gameService.createGame(model.userId, game)
+            gameService.createGame(game)
                 .then(function () {
                     $location.url("user/" + model.userId + "/game");
                 });

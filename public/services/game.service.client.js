@@ -1,11 +1,12 @@
 (function () {
     angular.module("GameOn").factory("gameService", gameService);
 
-    function gameService($http) {
+    function gameService($http, giantBombService) {
         var api = {
             "createGame": createGame,
             "findGamesByUser": findGamesByUser,
             "findLikedGamesByUser": findLikedGamesByUser,
+            "findGameByExternalId": findGameByExternalId,
             "getFollowers": getFollowers,
             "getFollowing": getFollowing,
             "findGameById": findGameById,
@@ -15,8 +16,8 @@
 
         return api;
 
-        function createGame(userId, game) {
-            var url = "/api/user/" + userId + "/game";
+        function createGame(game) {
+            var url = "/api/game";
 
             return $http.post(url, game).then(successCallback, errorCallback);
         }
@@ -51,6 +52,17 @@
             return $http.get(url).then(successCallback, errorCallback);
         }
 
+        function findGameByExternalId(externalId) {
+            var url = "/api/game?externalId=" + externalId;
+
+            return $http.get(url).then(successCallback, function () {
+                return giantBombService.getGameById(externalId)
+                    .then(function (gameData) {
+                        return createGame(giantBombService.getGameObject(gameData.results))
+                    })
+            });
+        }
+
         function updateGame(gameId, game) {
             var url = "/api/game/" + gameId;
 
@@ -69,6 +81,10 @@
 
         function errorCallback() {
             return null;
+        }
+
+        function errorCallbackFor503() {
+            giantBombService.getGameById()
         }
     }
 })();

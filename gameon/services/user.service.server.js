@@ -23,17 +23,6 @@ function createUser(request, response) {
         });
 }
 
-function findUserByUsername(request, response) {
-    var username = request.query.username;
-
-    userModel.findUserByUsername(username)
-        .then(function (user) {
-            response.send(user);
-        }, function (error) {
-            response.sendStatus(404).error(error);
-        });
-}
-
 function findUserByCredentials(request, response) {
     var username = request.query.username;
     var password = request.query.password;
