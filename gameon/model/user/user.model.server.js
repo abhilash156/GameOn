@@ -13,7 +13,9 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addGame = addGame;
+userModel.addLike = addLike;
 userModel.removeGame = removeGame;
+userModel.removeLike = removeLike;
 
 module.exports = userModel;
 
@@ -29,11 +31,28 @@ function addGame(userId, gameId) {
         })
 }
 
+function addLike(userId, gameId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.liked.push(gameId);
+            return user.save();
+        })
+}
+
 function removeGame(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
             var index = user.games.indexOf(gameId);
             user.games.splice(index, 1);
+            return user.save();
+        })
+}
+
+function removeLike(userId, gameId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.liked.indexOf(gameId);
+            user.liked.splice(index, 1);
             return user.save();
         })
 }

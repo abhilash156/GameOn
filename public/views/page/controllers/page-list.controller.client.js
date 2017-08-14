@@ -8,7 +8,11 @@
 
         model.userId = $routeParams["uid"];
         model.gameId = $routeParams["wid"];
+        model.liked = false;
+        model.owned = false;
         model.getGameURL = getGameURL;
+        model.likeGame = likeGame;
+        model.unLikeGame = unLikeGame;
 
         function init() {
             gameService.findGameById(model.gameId)
@@ -19,14 +23,36 @@
                             model.gameInfo = gameData.results;
                         });
                 });
+
+            gameService.isLiked(model.userId, model.gameId)
+                .then(function (value) {
+                    model.liked = value;
+                });
         }
 
         init();
 
-        function getGameURL(pageId) {
-            gameService.findGameByExternalId(pageId)
+        function getGameURL(externalId) {
+            gameService.findGameByExternalId(externalId)
                 .then(function (game) {
+                    console.log(game);
                     $location.url("/user/" + model.userId + "/game/" + game._id + "/page");
+                });
+        }
+
+        function likeGame() {
+            gameService.likeGame(model.userId, model.gameId)
+                .then(function (game) {
+                    console.log(game);
+                    model.liked = !model.liked;
+                });
+        }
+
+        function unLikeGame() {
+            gameService.unLikeGame(model.userId, model.gameId)
+                .then(function (game) {
+                    console.log(game);
+                    model.liked = !model.liked;
                 });
         }
 

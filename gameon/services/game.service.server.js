@@ -58,8 +58,8 @@ function findGameByExternalId(request, response) {
 
     gameModel.findGameByExternalId(externalId)
         .then(function (game) {
-            if (game.length === 0) {
-                response.sendStatus(503);
+            if (game === null) {
+                response.sendStatus(204);
             } else {
                 response.send(game);
             }

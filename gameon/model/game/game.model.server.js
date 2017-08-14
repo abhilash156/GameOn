@@ -34,6 +34,23 @@ function removePage(gameId, pageId) {
         })
 }
 
+function addLike(gameId, userId) {
+    return gameModel.findById(gameId)
+        .then(function (game) {
+            game.likes.push(userId);
+            return game.save();
+        })
+}
+
+function removeLike(gameId, userId) {
+    return gameModel.findById(gameId)
+        .then(function (game) {
+            var index = game.pages.indexOf(userId);
+            game.likes.splice(index, 1);
+            return game.save();
+        })
+}
+
 function createGame(game) {
 
     return gameModel.create(game);
@@ -46,7 +63,7 @@ function findGameById(gameId) {
 
 function findGameByExternalId(externalId) {
 
-    return gameModel.find({"externalId": externalId});
+    return gameModel.findOne({"externalId": externalId});
 }
 
 function updateGame(gameId, game) {

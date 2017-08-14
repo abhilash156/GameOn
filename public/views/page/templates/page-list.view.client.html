@@ -33,30 +33,34 @@
                                 <div class="profile-usertitle-job">{{ model.gameInfo.developers[0].name }}</div>
                             </div>
                             <div class="profile-userbuttons">
-                                <button type="button" class="btn btn-success btn-sm">Follow</button>
-                                <button type="button" class="btn btn-danger btn-sm">Message</button>
+                                <div ng-switch="model.liked">
+                                    <div ng-switch-when=false>
+                                        <a role="button" class="btn btn-success btn-sm"
+                                           ng-click="model.likeGame()">Follow</a>
+                                    </div>
+                                    <div ng-switch-when=true>
+                                        <a role="button" class="btn btn-danger btn-sm"
+                                           ng-click="model.unLikeGame()">Unfollow</a>
+                                    </div>
+                                </div>
+                                <div ng-switch="model.owned">
+                                    <div ng-switch-when=false>
+                                        <a role="button" class="btn btn-info btn-sm">Buy</a>
+                                        <a role="button" class="btn btn-info btn-sm">Add to Wishlist</a>
+                                    </div>
+                                    <div ng-switch-when=true>
+                                        <h5 class="profile-text"><i>You own this game!</i></h5>
+                                    </div>
+                                </div>
                             </div>
                             <div class="profile-usermenu">
                                 <ul class="nav">
                                     <li class="active">
-                                        <a href="#">
-                                            <i class="glyphicon glyphicon-home"></i>
+                                        <a href="#"><i class="glyphicon glyphicon-home"></i>
                                             Overview </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <i class="glyphicon glyphicon-user"></i>
-                                            Account Settings </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i class="glyphicon glyphicon-ok"></i>
-                                            Tasks </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="glyphicon glyphicon-flag"></i>
-                                            Help </a>
+                                        <a href="#"><i class="fa fa-gamepad"></i>Gameplay </a>
                                     </li>
                                 </ul>
                             </div>
@@ -66,56 +70,55 @@
                         <div class="profile-content">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    {{ model.gameInfo.deck }}
+                                    <h3 class="profile-text"><i>{{ model.gameInfo.name }} : Overview</i></h3>
                                 </li>
-
                                 <li class="list-group-item">
-                                    <h4>OVERVIEW</h4>
+                                    <label class="profile-text">Summary:</label>
+                                    <p><i>{{ model.gameInfo.deck }}</i></p>
                                 </li>
-
                                 <li class="list-group-item">
-                                    <label>Platform:</label>
+                                    <label class="profile-text">Platform:</label>
                                     <ul ng-repeat="platform in model.gameInfo.platforms">
                                         <li>{{platform.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>Developers:</label>
+                                    <label class="profile-text">Developers:</label>
                                     <ul ng-repeat="developer in model.gameInfo.developers">
                                         <li>{{developer.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>Publishers:</label>
+                                    <label class="profile-text">Publishers:</label>
                                     <ul ng-repeat="publisher in model.gameInfo.publishers">
                                         <li>{{publisher.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>DLCs:</label>
+                                    <label class="profile-text">DLCs:</label>
                                     <ul ng-repeat="dlc in model.gameInfo.dlcs">
                                         <li>{{dlc.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>Genre:</label>
+                                    <label class="profile-text">Genre:</label>
                                     <ul ng-repeat="genre in model.gameInfo.genres">
                                         <li>{{genre.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>Themes:</label>
+                                    <label class="profile-text">Themes:</label>
                                     <ul ng-repeat="theme in model.gameInfo.themes">
                                         <li>{{theme.name}}</li>
                                     </ul>
                                 <li class="list-group-item">
-                                    <label>Characters:</label>
+                                    <label class="profile-text">Characters:</label>
                                     <ul ng-repeat="character in model.gameInfo.characters">
                                         <li>{{character.name}}</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item">
-                                    <label>Similar Games:</label>
+                                    <label class="profile-text">Similar Games:</label>
                                     <ul ng-repeat="similar_game in model.gameInfo.similar_games">
                                         <li>
                                             <a ng-click="model.getGameURL(similar_game.id)" role="button">

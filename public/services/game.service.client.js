@@ -9,9 +9,14 @@
             "findGameByExternalId": findGameByExternalId,
             "getFollowers": getFollowers,
             "getFollowing": getFollowing,
+            "isFollowing": isFollowing,
+            "isFollower": isFollower,
+            "isLiked": isLiked,
             "findGameById": findGameById,
             "updateGame": updateGame,
-            "deleteGame": deleteGame
+            "deleteGame": deleteGame,
+            "likeGame": likeGame,
+            "unLikeGame": unLikeGame
         };
 
         return api;
@@ -40,8 +45,38 @@
             return $http.get(url).then(successCallback, errorCallback);
         }
 
+        function likeGame(userId, gameId) {
+            var url = "/api/user/" + userId + "/like/" + gameId;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function unLikeGame(userId, gameId) {
+            var url = "/api/user/" + userId + "/unlike/" + gameId;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
         function getFollowing(userId) {
             var url = "/api/user/" + userId + "/following";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isFollowing(userId, userId2) {
+            var url = "/api/user/" + userId + "/following/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isFollower(userId, userId2) {
+            var url = "/api/user/" + userId + "/followers/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isLiked(userId, gameId) {
+            var url = "/api/user/" + userId + "/liked/" + gameId;
 
             return $http.get(url).then(successCallback, errorCallback);
         }
@@ -55,12 +90,16 @@
         function findGameByExternalId(externalId) {
             var url = "/api/game?externalId=" + externalId;
 
-            return $http.get(url).then(successCallback, function () {
-                return giantBombService.getGameById(externalId)
-                    .then(function (gameData) {
-                        return createGame(giantBombService.getGameObject(gameData.results))
-                    })
-            });
+            return $http.get(url).then(function (response) {
+                if (response.status === 204) {
+                    return giantBombService.getGameById(externalId)
+                        .then(function (gameData) {
+                            return createGame(giantBombService.getGameObject(gameData.results))
+                        })
+                } else {
+                    successCallback(response);
+                }
+            }, errorCallback);
         }
 
         function updateGame(gameId, game) {
@@ -81,10 +120,6 @@
 
         function errorCallback() {
             return null;
-        }
-
-        function errorCallbackFor503() {
-            giantBombService.getGameById()
         }
     }
 })();
