@@ -3,10 +3,10 @@
         .module("GameOn")
         .controller("pageListController", pageListController);
 
-    function pageListController($routeParams, gameService, giantBombService, $location) {
+    function pageListController($routeParams, gameService, giantBombService, $location, sessionUser) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
         model.gameId = $routeParams["wid"];
         model.liked = false;
         model.owned = false;
@@ -15,14 +15,14 @@
         model.unLikeGame = unLikeGame;
 
         function init() {
-            /*gameService.findGameById(model.gameId)
+            gameService.findGameById(model.gameId)
                 .then(function (game) {
                     model.game = game;
                     giantBombService.getGameById(game.externalId)
                         .then(function (gameData) {
                             model.gameInfo = gameData.results;
                         });
-                });*/
+                });
 
             gameService.isLiked(model.userId, model.gameId)
                 .then(function (value) {
@@ -61,7 +61,7 @@
                 });
         }
 
-        model.gameInfo = {
+        model.gameInfo2 = {
             "aliases": null,
             "api_detail_url": "https://www.giantbomb.com/api/game/3030-49973/",
             "date_added": "2015-06-15 19:21:55",

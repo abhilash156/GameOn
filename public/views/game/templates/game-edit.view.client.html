@@ -3,14 +3,14 @@
         <div class="container-fluid">
             <div class="row delta-margin-top">
                 <div class="col-xs-1 pull-left">
-                    <a href="#!/user/{{model.userId}}/game"><span
+                    <a href="#!/game"><span
                             class="delta-navbar-icon glyphicon glyphicon-chevron-left pull-left"></span></a>
                 </div>
                 <div class="visible-lg col-lg-1">
                     <p class="accent-text pull-left"><b>Games</b></p>
                 </div>
                 <div class="visible-lg col-lg-1">
-                    <a href="#!/user/{{model.userId}}/game/new"><span
+                    <a href="#!/game/new"><span
                             class="delta-navbar-icon glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
 
@@ -34,10 +34,10 @@
                     <li ng-repeat="game in model.games" class="list-group-item">
                         <div class="row">
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.userId}}/game/{{game._id}}/page"><b>{{game.name}}</b></a>
+                                <a href="#!/game/{{game._id}}/page"><b>{{game.name}}</b></a>
                             </div>
                             <div class="col-xs-2">
-                                <a href="#!/user/{{model.userId}}/game/{{game._id}}"><span
+                                <a href="#!/game/{{game._id}}"><span
                                         class="glyphicon glyphicon-cog pull-right"></span></a>
                             </div>
                         </div>

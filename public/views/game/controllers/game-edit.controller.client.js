@@ -3,11 +3,11 @@
         .module("GameOn")
         .controller("editGameController", editGameController);
 
-    function editGameController($routeParams, gameService, $location) {
+    function editGameController($routeParams, gameService, $location, sessionUser) {
         var model = this;
         model.updateGame = updateGame;
         model.deleteGame = deleteGame;
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
         model.gameId = $routeParams["wid"];
 
         function init() {
@@ -27,14 +27,14 @@
         function updateGame(game) {
             gameService.updateGame(model.gameId, game)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/game");
+                    $location.url("/game");
                 });
         }
 
         function deleteGame() {
             gameService.deleteGame(model.gameId)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/game");
+                    $location.url("/game");
                 });
         }
     }

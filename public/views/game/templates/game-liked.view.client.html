@@ -3,13 +3,13 @@
         <div class="container-fluid">
             <div class="row delta-margin-top">
                 <div class="col-xs-1 pull-left">
-                    <a href="#!/user/{{model.userId}}/"><span class="delta-navbar-icon glyphicon glyphicon-chevron-left pull-left"></span></a>
+                    <a href="#!/"><span class="delta-navbar-icon glyphicon glyphicon-chevron-left pull-left"></span></a>
                 </div>
                 <div class="col-lg-1 col-xs-2">
                     <p class="accent-text pull-left"><b>Games</b></p>
                 </div>
                 <div class="col-lg-1 col-xs-2 pull-right">
-                    <a href="#!/user/{{model.userId}}/game/new"><span
+                    <a href="#!/game/new"><span
                             class="delta-navbar-icon glyphicon glyphicon-plus pull-right"></span></a>
                 </div>
             </div>
@@ -26,11 +26,11 @@
                                 <img ng-src="{{game.cover}}" width="120" height="160">
                             </div>
                             <div class="col-xs-8">
-                                <a href="#!/user/{{model.userId}}/game/{{game._id}}/page"><h4>{{game.name}}</h4></a>
+                                <a href="#!/game/{{game._id}}/page"><h4>{{game.name}}</h4></a>
                                 <p>{{game.description}}</p>
                             </div>
                             <div class="col-xs-2">
-                                <a href="#!/user/{{model.userId}}/game/{{game._id}}">
+                                <a href="#!/game/{{game._id}}">
                                     <span class="glyphicon glyphicon-cog pull-right"></span></a>
                             </div>
                         </div>

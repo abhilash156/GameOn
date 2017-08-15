@@ -3,12 +3,12 @@
         .module("GameOn")
         .controller("editPageController", editPageController);
 
-    function editPageController($routeParams, pageService, $location) {
+    function editPageController($routeParams, pageService, $location, sessionUser) {
         var model = this;
         model.updatePage = updatePage;
         model.deletePage = deletePage;
 
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
         model.gameId = $routeParams["wid"];
         model.pageId = $routeParams["pid"];
 

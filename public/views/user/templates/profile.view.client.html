@@ -22,7 +22,7 @@
                                 <span class="delta-list-icon fa fa-gamepad"></span>
                             </div>
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.user._id}}/game"><h5>My Games</h5></a>
+                                <a href="#!/game"><h5>My Games</h5></a>
                             </div>
                         </div>
                     </li>
@@ -32,7 +32,7 @@
                                 <span class="delta-list-icon glyphicon glyphicon-bookmark"></span>
                             </div>
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.user._id}}/liked"><h5>Liked Games</h5></a>
+                                <a href="#!/liked"><h5>Liked Games</h5></a>
                             </div>
                         </div>
                     </li>
@@ -42,7 +42,7 @@
                                 <span class="delta-list-icon fa fa-users"></span>
                             </div>
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.user._id}}/following"><h5>Following</h5></a>
+                                <a href="#!/following"><h5>Following</h5></a>
                             </div>
                         </div>
                     </li>
@@ -52,7 +52,7 @@
                                 <span class="delta-list-icon fa fa-users"></span>
                             </div>
                             <div class="col-xs-10">
-                                <a href="#!/user/{{model.user._id}}/followers"><h5>Followers</h5></a>
+                                <a href="#!/followers"><h5>Followers</h5></a>
                             </div>
                         </div>
                     </li>
@@ -69,7 +69,7 @@
                 <label>Last Name</label>
                 <input class="form-control" ng-model="model.user.lastName" placeholder="Last Name"/>
                 <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model.user._id)"><b>Delete</b></a>
-                <a class="btn btn-danger btn-block" href="#!/login"><b>Logout</b></a>
+                <a class="btn btn-danger btn-block" ng-click="model.logout()"><b>Logout</b></a>
             </div>
         </div>
     </div>

@@ -3,10 +3,10 @@
         .module("GameOn")
         .controller("gameLikedController", gameListController);
 
-    function gameListController($routeParams, gameService) {
+    function gameListController(gameService, sessionUser) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
 
         function init() {
             gameService.findLikedGamesByUser(model.userId)

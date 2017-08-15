@@ -1,9 +1,18 @@
 var app = require("../../express");
 
 var userModel = require("../model/user/user.model.server");
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy(localStrategy));
+
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
 
 app.post("/api/user", createUser);
-app.get("/api/user", findUserByCredentials);
+app.get("/api/user", findUserByUsername);
+app.post("/api/login", passport.authenticate('local'), login);
+app.post("/api/logout", logout);
+app.get("/api/checkLogin", checkLogin);
 app.get("/api/user/:userId", findUserById);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
@@ -30,26 +39,59 @@ function createUser(request, response) {
         });
 }
 
-function findUserByCredentials(request, response) {
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+function deserializeUser(user, done) {
+    userModel
+        .findUserById(user._id)
+        .then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
+}
+
+function localStrategy(username, password, done) {
+    userModel.findUserByCredentials(username, password)
+        .then(function (user) {
+            if (!user) {
+                return done(null, false);
+            }
+            return done(null, user);
+        }, function (error) {
+            if (error) {
+                return done(error);
+            }
+        });
+}
+
+function login(request, response) {
+    var user = request.user;
+    response.json(user);
+}
+
+function logout(request, response) {
+    request.logOut();
+    response.send(200);
+}
+
+function checkLogin(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+}
+
+function findUserByUsername(request, response) {
     var username = request.query.username;
-    var password = request.query.password;
-    if (username && password) {
-        userModel.findUserByCredentials(username, password)
-            .then(function (user) {
-                response.send(user);
-            }, function (error) {
-                response.sendStatus(404).error(error);
-            });
-    } else if (username) {
-        userModel.findUserByUsername(username)
-            .then(function (user) {
-                response.send(user);
-            }, function (error) {
-                response.sendStatus(404).error(error);
-            });
-    } else {
-        response.sendStatus(400);
-    }
+    userModel.findUserByUsername(username)
+        .then(function (user) {
+            response.send(user);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
 }
 
 function findUserById(request, response) {

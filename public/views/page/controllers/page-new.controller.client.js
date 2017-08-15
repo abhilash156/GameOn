@@ -3,10 +3,10 @@
         .module("GameOn")
         .controller("newPageController", newPageController);
 
-    function newPageController($routeParams, pageService, $location) {
+    function newPageController($routeParams, pageService, $location, sessionUser) {
         var model = this;
         model.createPage = createPage;
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
         model.gameId = $routeParams["wid"];
 
         function init() {

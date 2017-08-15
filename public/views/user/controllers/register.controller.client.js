@@ -20,8 +20,8 @@
                     .then(function (existUser) {
                         if (!existUser) {
                             userService.createUser(user)
-                                .then(function (newUser) {
-                                    $location.url("/user/" + newUser._id);
+                                .then(function () {
+                                    $location.url("profile");
                                 });
                         } else {
                             model.errorMessage = "User already exists";

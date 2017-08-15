@@ -3,10 +3,10 @@
         .module("GameOn")
         .controller("newGameController", newGameController);
 
-    function newGameController($routeParams, gameService, $location) {
+    function newGameController(gameService, $location, sessionUser) {
         var model = this;
         model.createGame = createGame;
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
 
         function init() {
             gameService.findGamesByUser(model.userId)
@@ -20,7 +20,7 @@
         function createGame(game) {
             gameService.createGame(game)
                 .then(function () {
-                    $location.url("user/" + model.userId + "/game");
+                    $location.url("game");
                 });
         }
     }

@@ -23,55 +23,100 @@
                 controller: "registerController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/profile", {
                 templateUrl: "./views/user/templates/profile.view.client.html",
                 controller: "profileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game", {
+            .when("/game", {
                 templateUrl: "views/game/templates/game-list.view.client.html",
                 controller: "gameListController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/liked", {
+            .when("/liked", {
                 templateUrl: "views/game/templates/game-liked.view.client.html",
                 controller: "gameLikedController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/followed", {
+            .when("/followed", {
                 templateUrl: "views/game/templates/user-followed.view.client.html",
                 controller: "userFollowedController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/followers", {
+            .when("/followers", {
                 templateUrl: "views/game/templates/user-followers.view.client.html",
                 controller: "userFollowersController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game/new", {
+            .when("/game/new", {
                 templateUrl: "views/game/templates/game-new.view.client.html",
                 controller: "newGameController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game/:wid", {
+            .when("/game/:wid", {
                 templateUrl: "views/game/templates/game-edit.view.client.html",
                 controller: "editGameController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game/:wid/page", {
+            .when("/game/:wid/page", {
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "pageListController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game/:wid/page/new", {
+            .when("/game/:wid/page/new", {
                 templateUrl: "views/page/templates/page-new.view.client.html",
                 controller: "newPageController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
-            .when("/user/:uid/game/:wid/page/:pid", {
+            .when("/game/:wid/page/:pid", {
                 templateUrl: "views/page/templates/page-edit.view.client.html",
                 controller: "editPageController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
     }
+
+    function checkLogin(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService.checkLogin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url("/login");
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
 })();

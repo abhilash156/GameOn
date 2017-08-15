@@ -3,13 +3,14 @@
         .module("GameOn")
         .controller("profileController", profileController);
 
-    function profileController($routeParams, userService, $location) {
+    function profileController(userService, $location, sessionUser) {
         var model = this;
 
-        model.userId = $routeParams["uid"];
+        model.userId = sessionUser._id;
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.logout = logout;
 
         function init() {
             userService.findUserById(model.userId)
@@ -23,7 +24,7 @@
         function updateUser(user) {
             userService.updateUser(model.userId, user)
                 .then(function () {
-                    $location.url("user/" + model.userId);
+                    $location.url("profile");
                 });
         }
 
@@ -32,6 +33,13 @@
                 .then(function () {
                     $location.url("login/");
                 });
+        }
+
+        function logout() {
+            userService.logout()
+                .then(function () {
+                    $location.url("login/");
+                })
         }
     }
 })();

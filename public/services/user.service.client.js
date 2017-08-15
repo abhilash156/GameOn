@@ -7,6 +7,8 @@
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
+            "checkLogin": checkLogin,
+            "logout": logout,
             "updateUser": updateUser,
             "deleteUser": deleteUser
         };
@@ -31,9 +33,10 @@
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username=" + username + "&password=" + password;
+            var url = "/api/login";
 
-            return $http.get(url).then(successCallback, errorCallback);
+            return $http.post(url, {username: username, password: password})
+                .then(successCallback, errorCallback);
         }
 
         function updateUser(userId, user) {
@@ -48,6 +51,15 @@
             return $http.delete(url).then(successCallback, errorCallback);
         }
 
+        function checkLogin() {
+            return $http.get("/api/checkLogin").then(successCallback, errorCallback);
+        }
+
+        function logout() {
+            return $http.get("/api/logout").then(successCallback, errorCallback);
+        }
+
+
         function successCallback(response) {
             return response.data;
         }
@@ -55,5 +67,7 @@
         function errorCallback() {
             return null;
         }
+
+
     }
 })();
