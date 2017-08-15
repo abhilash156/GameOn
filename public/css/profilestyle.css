@@ -2,12 +2,10 @@ body {
     background: #F1F3FA;
 }
 
-/* Profile container */
-.profile {
+.delta-object {
     margin: 20px 0;
 }
 
-/* Profile sidebar */
 .delta-object-sidebar {
     padding: 20px 0 10px 0;
     background: #fff;

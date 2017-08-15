@@ -12,7 +12,7 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid">
+    <!--<div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-xs-4">
                 <ul class="list-group">
@@ -71,6 +71,125 @@
                 <a class="btn btn-danger btn-block" ng-click="model.deleteUser(model.user._id)"><b>Delete</b></a>
                 <a class="btn btn-danger btn-block" ng-click="model.logout()"><b>Logout</b></a>
             </div>
+        </div>
+    </div>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+            <div class="col-xs-12 col-lg-8 col-md-10">
+                <div class="row delta-object">
+                    <div class="col-md-3">
+                        <div class="delta-object-sidebar">
+                            <div class="delta-object-image">
+                                <img ng-src="https://www.filmcentro.com/sites/default/files/image-gallery/Scarlett%20Johansson1_0.jpg"
+                                     class="img-responsive" alt="">
+                            </div>
+                            <div class="delta-object-title">
+                                <div class="delta-object-title-name">{{ model.user.firstName }} {{ model.user.lastName
+                                    }}
+                                </div>
+                                <div class="delta-object-title-job">{{ model.user.username }}</div>
+                            </div>
+                            <div class="delta-object-buttons">
+                                <div ng-switch="model.liked">
+                                    <div ng-switch-when=false>
+                                        <a role="button" class="btn btn-success btn-sm"
+                                           ng-click="model.followUser()">Follow</a>
+                                    </div>
+                                    <div ng-switch-when=true>
+                                        <a role="button" class="btn btn-danger btn-sm"
+                                           ng-click="model.unFollowUser()">Unfollow</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="delta-object-menu">
+                                <ul class="nav">
+                                    <li class="active">
+                                        <a href="#"><i class="glyphicon glyphicon-home"></i>Profile</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!/game"><i class="fa fa-gamepad"></i>Games</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!/liked"><i class="glyphicon glyphicon-bookmark"></i>Liked</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!/following"><i class="fa fa-users"></i>Following</a>
+                                    </li>
+                                    <li>
+                                        <a href="#!/followers"><i class="fa fa-users"></i>Followers</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="delta-object-content">
+                            <!--<ul class="list-group">
+                                <li class="list-group-item">
+                                    <h3 class="delta-object-text"><i>{{ model.gameInfo.name }} : Overview</i></h3>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Summary:</label>
+                                    <p><i>{{ model.gameInfo.deck }}</i></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Platform:</label>
+                                    <ul ng-repeat="platform in model.gameInfo.platforms">
+                                        <li>{{platform.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Developers:</label>
+                                    <ul ng-repeat="developer in model.gameInfo.developers">
+                                        <li>{{developer.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Publishers:</label>
+                                    <ul ng-repeat="publisher in model.gameInfo.publishers">
+                                        <li>{{publisher.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">DLCs:</label>
+                                    <ul ng-repeat="dlc in model.gameInfo.dlcs">
+                                        <li>{{dlc.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Genre:</label>
+                                    <ul ng-repeat="genre in model.gameInfo.genres">
+                                        <li>{{genre.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Themes:</label>
+                                    <ul ng-repeat="theme in model.gameInfo.themes">
+                                        <li>{{theme.name}}</li>
+                                    </ul>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Characters:</label>
+                                    <ul ng-repeat="character in model.gameInfo.characters">
+                                        <li>{{character.name}}</li>
+                                    </ul>
+                                </li>
+                                <li class="list-group-item">
+                                    <label class="delta-object-text">Similar Games:</label>
+                                    <ul ng-repeat="similar_game in model.gameInfo.similar_games">
+                                        <li>
+                                            <a ng-click="model.getGameURL(similar_game.id)" role="button">
+                                                {{similar_game.name}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
         </div>
     </div>
     <div class="delta-navbar-bottom">
