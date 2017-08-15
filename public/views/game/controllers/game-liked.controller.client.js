@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("GameOn")
-        .controller("gameLikedController", gameListController);
+        .controller("gameLikedController", gameLikedController);
 
-    function gameListController(gameService, sessionUser) {
+    function gameLikedController(gameService, sessionUser) {
         var model = this;
 
         model.userId = sessionUser._id;

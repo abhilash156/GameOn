@@ -79,30 +79,14 @@
                     sessionUser: checkLogin
                 }
             })
-            .when("/game/:wid/page", {
-                templateUrl: "views/page/templates/page-list.view.client.html",
-                controller: "pageListController",
+            .when("/game/:wid/detail", {
+                templateUrl: "views/game/templates/game-detail.view.client.html",
+                controller: "gameDetailController",
                 controllerAs: "model",
                 resolve: {
                     sessionUser: checkLogin
                 }
-            })
-            .when("/game/:wid/page/new", {
-                templateUrl: "views/page/templates/page-new.view.client.html",
-                controller: "newPageController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLogin
-                }
-            })
-            .when("/game/:wid/page/:pid", {
-                templateUrl: "views/page/templates/page-edit.view.client.html",
-                controller: "editPageController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLogin
-                }
-            })
+            });
     }
 
     function checkLogin(userService, $q, $location) {

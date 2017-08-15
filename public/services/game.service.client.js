@@ -17,6 +17,7 @@
             "updateGame": updateGame,
             "deleteGame": deleteGame,
             "likeGame": likeGame,
+            "buyGame": buyGame,
             "unLikeGame": unLikeGame
         };
 
@@ -29,7 +30,7 @@
         }
 
         function findGamesByUser(userId) {
-            var url = "/api/user/" + userId + "/game";
+            var url = "/api/user/" + userId + "/owned";
 
             return $http.get(url).then(successCallback, errorCallback);
         }
@@ -48,6 +49,12 @@
 
         function likeGame(userId, gameId) {
             var url = "/api/user/" + userId + "/like/" + gameId;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function buyGame(userId, gameId) {
+            var url = "/api/user/" + userId + "/buy/" + gameId;
 
             return $http.get(url).then(successCallback, errorCallback);
         }
@@ -83,7 +90,7 @@
         }
 
         function isOwned(userId, gameId) {
-            var url = "/api/user/" + userId + "/games/" + gameId;
+            var url = "/api/user/" + userId + "/owned/" + gameId;
 
             return $http.get(url).then(successCallback, errorCallback);
         }

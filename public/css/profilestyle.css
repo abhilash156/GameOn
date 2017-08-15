@@ -8,34 +8,34 @@ body {
 }
 
 /* Profile sidebar */
-.profile-sidebar {
+.delta-object-sidebar {
     padding: 20px 0 10px 0;
     background: #fff;
 }
 
-.profile-text {
+.delta-object-text {
     color: #00838f;
 }
 
-.profile-userpic img {
+.delta-object-image img {
     float: none;
     margin: 0 auto;
     width: 90%;
 }
 
-.profile-usertitle {
+.delta-object-title {
     text-align: center;
     margin-top: 20px;
 }
 
-.profile-usertitle-name {
+.delta-object-title-name {
     color: #5a7391;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 7px;
 }
 
-.profile-usertitle-job {
+.delta-object-title-job {
     text-transform: uppercase;
     color: #00838f;
     font-size: 12px;
@@ -43,12 +43,12 @@ body {
     margin-bottom: 15px;
 }
 
-.profile-userbuttons {
+.delta-object-buttons {
     text-align: center;
     margin-top: 10px;
 }
 
-.profile-userbuttons .btn {
+.delta-object-buttons .btn {
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 600;
@@ -56,43 +56,43 @@ body {
     margin-right: 5px;
 }
 
-.profile-userbuttons .btn:last-child {
+.delta-object-buttons .btn:last-child {
     margin-right: 0px;
 }
 
-.profile-usermenu {
+.delta-object-menu {
     margin-top: 30px;
 }
 
-.profile-usermenu ul li {
+.delta-object-menu ul li {
     border-bottom: 1px solid #f0f4f7;
 }
 
-.profile-usermenu ul li:last-child {
+.delta-object-menu ul li:last-child {
     border-bottom: none;
 }
 
-.profile-usermenu ul li a {
+.delta-object-menu ul li a {
     color: #93a3b5;
     font-size: 14px;
     font-weight: 400;
 }
 
-.profile-usermenu ul li a i {
+.delta-object-menu ul li a i {
     margin-right: 8px;
     font-size: 14px;
 }
 
-.profile-usermenu ul li a:hover {
+.delta-object-menu ul li a:hover {
     background-color: #fafcfd;
     color: #00838f;
 }
 
-.profile-usermenu ul li.active {
+.delta-object-menu ul li.active {
     border-bottom: none;
 }
 
-.profile-usermenu ul li.active a {
+.delta-object-menu ul li.active a {
     color: #00838f;
     background-color: #f6f9fb;
     border-left: 2px solid #00838f;
@@ -100,7 +100,7 @@ body {
 }
 
 /* Profile Content */
-.profile-content {
+.delta-object-content {
     padding: 20px;
     background: #fff;
     min-height: 460px;

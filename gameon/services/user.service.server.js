@@ -16,15 +16,17 @@ app.get("/api/checkLogin", checkLogin);
 app.get("/api/user/:userId", findUserById);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
-app.get("/api/user/:userId/game", findGamesByUser);
 
 app.get("/api/user/:userId/liked", findLikedGamesByUser);
 app.get("/api/user/:userId/liked/:gameId", isLiked);
+app.get("/api/user/:userId/owned", findOwnedGamesByUser);
+app.get("/api/user/:userId/owned/:gameId", isOwned);
 app.get("/api/user/:userId/following", getFollowing);
 app.get("/api/user/:userId/following/:userId2", isFollowing);
 app.get("/api/user/:userId/followers", getFollowers);
 app.get("/api/user/:userId/followers/:userId2", isFollower);
 
+app.get("/api/user/:userId/buy/:gameId", buyGame);
 app.get("/api/user/:userId/like/:gameId", likeGame);
 app.get("/api/user/:userId/unlike/:gameId", unLikeGame);
 
@@ -127,7 +129,7 @@ function deleteUser(request, response) {
         });
 }
 
-function findGamesByUser(request, response) {
+function findOwnedGamesByUser(request, response) {
     var userId = request.params.userId;
 
     userModel.findUserById(userId).populate("games")
@@ -211,11 +213,39 @@ function isLiked(request, response) {
         });
 }
 
+function isOwned(request, response) {
+    var userId = request.params.userId;
+    var gameId = request.params.gameId;
+
+    userModel.findUserById(userId)
+        .then(function (user) {
+            if (user.games.indexOf(gameId) >= 0) {
+                response.send(true);
+            } else {
+                response.send(false);
+            }
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
 function likeGame(request, response) {
     var userId = request.params.userId;
     var gameId = request.params.gameId;
 
     userModel.addLike(userId, gameId)
+        .then(function (user) {
+            response.send(user);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function buyGame(request, response) {
+    var userId = request.params.userId;
+    var gameId = request.params.gameId;
+
+    userModel.addGame(userId, gameId)
         .then(function (user) {
             response.send(user);
         }, function (error) {

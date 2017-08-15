@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("GameOn")
-        .controller("pageListController", pageListController);
+        .controller("gameDetailController", gameDetailController);
 
-    function pageListController($routeParams, gameService, giantBombService, $location, sessionUser) {
+    function gameDetailController($routeParams, gameService, giantBombService, $location, sessionUser) {
         var model = this;
 
         model.userId = sessionUser._id;
@@ -13,16 +13,17 @@
         model.getGameURL = getGameURL;
         model.likeGame = likeGame;
         model.unLikeGame = unLikeGame;
+        model.buyGame = buyGame;
 
         function init() {
-            gameService.findGameById(model.gameId)
+            /*gameService.findGameById(model.gameId)
                 .then(function (game) {
                     model.game = game;
                     giantBombService.getGameById(game.externalId)
                         .then(function (gameData) {
                             model.gameInfo = gameData.results;
                         });
-                });
+                });*/
 
             gameService.isLiked(model.userId, model.gameId)
                 .then(function (value) {
@@ -40,28 +41,32 @@
         function getGameURL(externalId) {
             gameService.findGameByExternalId(externalId)
                 .then(function (game) {
-                    console.log(game);
-                    $location.url("/user/" + model.userId + "/game/" + game._id + "/page");
+                    $location.url("/game/" + game._id + "/detail");
                 });
         }
 
         function likeGame() {
             gameService.likeGame(model.userId, model.gameId)
                 .then(function (game) {
-                    console.log(game);
                     model.liked = !model.liked;
+                });
+        }
+
+        function buyGame() {
+            gameService.buyGame(model.userId, model.gameId)
+                .then(function (game) {
+                    model.owned = true;
                 });
         }
 
         function unLikeGame() {
             gameService.unLikeGame(model.userId, model.gameId)
                 .then(function (game) {
-                    console.log(game);
                     model.liked = !model.liked;
                 });
         }
 
-        model.gameInfo2 = {
+        model.gameInfo = {
             "aliases": null,
             "api_detail_url": "https://www.giantbomb.com/api/game/3030-49973/",
             "date_added": "2015-06-15 19:21:55",
