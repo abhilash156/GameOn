@@ -5,59 +5,12 @@
                 <div class="col-lg-1 col-xs-2 pull-left">
                     <p class="accent-text pull-left"><b>Profile</b></p>
                 </div>
-                <div class="col-lg-1 col-xs-2 pull-right">
-                    <a ng-click="model.updateUser(model.user)" role="button" type="submit">
-                        <span class="delta-navbar-icon glyphicon glyphicon-ok pull-right"></span></a>
-                </div>
             </div>
         </div>
     </nav>
     <!--<div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-xs-4">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <span class="delta-list-icon fa fa-gamepad"></span>
-                            </div>
-                            <div class="col-xs-10">
-                                <a href="#!/game"><h5>My Games</h5></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <span class="delta-list-icon glyphicon glyphicon-bookmark"></span>
-                            </div>
-                            <div class="col-xs-10">
-                                <a href="#!/liked"><h5>Liked Games</h5></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <span class="delta-list-icon fa fa-users"></span>
-                            </div>
-                            <div class="col-xs-10">
-                                <a href="#!/following"><h5>Following</h5></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <span class="delta-list-icon fa fa-users"></span>
-                            </div>
-                            <div class="col-xs-10">
-                                <a href="#!/followers"><h5>Followers</h5></a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+
             <div class="col-lg-9 col-xs-8">
                 <h2 class="heading">Profile</h2>
                 <label>Username</label>
@@ -75,8 +28,8 @@
     </div>-->
     <div class="container-fluid">
         <div class="row">
-            <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
-            <div class="col-xs-12 col-lg-8 col-md-10">
+            <div class="visible-lg visible-md col-md-1"></div>
+            <div class="col-xs-12 col-lg-10 col-md-10">
                 <div class="row delta-object">
                     <div class="col-md-3">
                         <div class="delta-object-sidebar">
@@ -85,8 +38,8 @@
                                      class="img-responsive" alt="">
                             </div>
                             <div class="delta-object-title">
-                                <div class="delta-object-title-name">{{ model.user.firstName }} {{ model.user.lastName
-                                    }}
+                                <div class="delta-object-title-name">
+                                    {{ model.user.firstName }} {{ model.user.lastName}}
                                 </div>
                                 <div class="delta-object-title-job">{{ model.user.username }}</div>
                             </div>
@@ -105,19 +58,24 @@
                             <div class="delta-object-menu">
                                 <ul class="nav">
                                     <li class="active">
-                                        <a href="#"><i class="glyphicon glyphicon-home"></i>Profile</a>
+                                        <a ng-click="model.setContentType('PROFILE')" role="button">
+                                            <i class="fa fa-home"></i>Profile</a>
                                     </li>
                                     <li>
-                                        <a href="#!/game"><i class="fa fa-gamepad"></i>Games</a>
+                                        <a ng-click="model.setContentType('GAMES')" role="button">
+                                            <i class="fa fa-gamepad"></i>Games</a>
                                     </li>
                                     <li>
-                                        <a href="#!/liked"><i class="glyphicon glyphicon-bookmark"></i>Liked</a>
+                                        <a ng-click="model.setContentType('LIKED')" role="button">
+                                            <i class="fa fa-bookmark"></i>Liked</a>
                                     </li>
                                     <li>
-                                        <a href="#!/following"><i class="fa fa-users"></i>Following</a>
+                                        <a ng-click="model.setContentType('FOLLOWING')" role="button">
+                                            <i class="fa fa-users"></i>Following</a>
                                     </li>
                                     <li>
-                                        <a href="#!/followers"><i class="fa fa-users"></i>Followers</a>
+                                        <a ng-click="model.setContentType('FOLLOWERS')" role="button">
+                                            <i class="fa fa-users"></i>Followers</a>
                                     </li>
                                 </ul>
                             </div>
@@ -125,6 +83,25 @@
                     </div>
                     <div class="col-md-9">
                         <div class="delta-object-content">
+                            <div ng-switch="model.contentType">
+                                <div ng-switch-when="PROFILE">
+                                    <ng-include src="'views/user/templates/content/user.profile.view.client.html'">
+                                </div>
+                                <div ng-switch-when="GAMES">
+                                    <ng-include src="'views/user/templates/content/user.games.view.client.html'">
+                                </div>
+                                <div ng-switch-when="LIKED">
+                                    <ng-include src="'views/user/templates/content/user.liked.view.client.html'">
+                                </div>
+                                <div ng-switch-when="FOLLOWING">
+                                    <ng-include src="'views/user/templates/content/user.following.view.client.html'">
+                                </div>
+                                <div ng-switch-when="FOLLOWERS">
+                                    <ng-include src="'views/user/templates/content/user.followers.view.client.html'">
+                                </div>
+                            </div>
+
+
                             <!--<ul class="list-group">
                                 <li class="list-group-item">
                                     <h3 class="delta-object-text"><i>{{ model.gameInfo.name }} : Overview</i></h3>
@@ -189,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
+            <div class="visible-lg visible-md col-md-1"></div>
         </div>
     </div>
     <div class="delta-navbar-bottom">

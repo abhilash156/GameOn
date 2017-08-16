@@ -1,0 +1,60 @@
+<ul class="list-group">
+    <li class="list-group-item">
+        <h3 class="delta-object-text"><i>{{ model.gameInfo.name }} : Overview</i></h3>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Summary:</label>
+        <p><i>{{ model.gameInfo.deck }}</i></p>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Platform:</label>
+        <ul ng-repeat="platform in model.gameInfo.platforms">
+            <li>{{platform.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Developers:</label>
+        <ul ng-repeat="developer in model.gameInfo.developers">
+            <li>{{developer.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Publishers:</label>
+        <ul ng-repeat="publisher in model.gameInfo.publishers">
+            <li>{{publisher.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">DLCs:</label>
+        <ul ng-repeat="dlc in model.gameInfo.dlcs">
+            <li>{{dlc.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Genre:</label>
+        <ul ng-repeat="genre in model.gameInfo.genres">
+            <li>{{genre.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Themes:</label>
+        <ul ng-repeat="theme in model.gameInfo.themes">
+            <li>{{theme.name}}</li>
+        </ul>
+    <li class="list-group-item">
+        <label class="delta-object-text">Characters:</label>
+        <ul ng-repeat="character in model.gameInfo.characters">
+            <li>{{character.name}}</li>
+        </ul>
+    </li>
+    <li class="list-group-item">
+        <label class="delta-object-text">Similar Games:</label>
+        <ul ng-repeat="similar_game in model.gameInfo.similar_games">
+            <li>
+                <a ng-click="model.getGameURL(similar_game.id)" role="button">
+                    {{similar_game.name}}
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

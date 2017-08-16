@@ -7,9 +7,11 @@
         var model = this;
 
         model.userId = sessionUser._id;
+        model.contentType = 'PROFILE';
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.setContentType = setContentType;
         model.logout = logout;
 
         function init() {
@@ -40,6 +42,10 @@
                 .then(function () {
                     $location.url("login/");
                 })
+        }
+
+        function setContentType(contentType) {
+            model.contentType = contentType;
         }
     }
 })();
