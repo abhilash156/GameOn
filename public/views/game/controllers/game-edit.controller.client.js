@@ -3,7 +3,7 @@
         .module("GameOn")
         .controller("editGameController", editGameController);
 
-    function editGameController($routeParams, gameService, $location, sessionUser) {
+    function editGameController($routeParams, gameService, $location, sessionUser, userService) {
         var model = this;
         model.updateGame = updateGame;
         model.deleteGame = deleteGame;
@@ -11,7 +11,7 @@
         model.gameId = $routeParams["wid"];
 
         function init() {
-            gameService.findGamesByUser(model.userId)
+            userService.getOwnedGamesByUser(model.userId)
                 .then(function (games) {
                     model.games = games;
                 });

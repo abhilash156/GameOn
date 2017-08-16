@@ -7,6 +7,8 @@
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
+            "getOwnedGamesByUser": getOwnedGamesByUser,
+            "getLikedGamesByUser": getLikedGamesByUser,
             "checkLogin": checkLogin,
             "logout": logout,
             "updateUser": updateUser,
@@ -37,6 +39,18 @@
 
             return $http.post(url, {username: username, password: password})
                 .then(successCallback, errorCallback);
+        }
+
+        function getOwnedGamesByUser(userId) {
+            var url = "/api/user/" + userId + "/owned";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getLikedGamesByUser(userId) {
+            var url = "/api/user/" + userId + "/liked";
+
+            return $http.get(url).then(successCallback, errorCallback);
         }
 
         function updateUser(userId, user) {

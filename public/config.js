@@ -31,22 +31,6 @@
                     sessionUser: checkLogin
                 }
             })
-            .when("/game", {
-                templateUrl: "views/game/templates/game-list.view.client.html",
-                controller: "gameListController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLogin
-                }
-            })
-            .when("/liked", {
-                templateUrl: "views/game/templates/game-liked.view.client.html",
-                controller: "gameLikedController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLogin
-                }
-            })
             .when("/followed", {
                 templateUrl: "views/game/templates/user-followed.view.client.html",
                 controller: "userFollowedController",

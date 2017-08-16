@@ -28,8 +28,8 @@
     </div>-->
     <div class="container-fluid">
         <div class="row">
-            <div class="visible-lg visible-md col-md-1"></div>
-            <div class="col-xs-12 col-lg-10 col-md-10">
+            <div class="visible-lg col-lg-1"></div>
+            <div class="col-xs-12 col-lg-10 col-md-12">
                 <div class="row delta-object">
                     <div class="col-md-3">
                         <div class="delta-object-sidebar">
@@ -44,7 +44,7 @@
                                 <div class="delta-object-title-job">{{ model.user.username }}</div>
                             </div>
                             <div class="delta-object-buttons">
-                                <div ng-switch="model.liked">
+                                <div ng-switch="model.followed">
                                     <div ng-switch-when=false>
                                         <a role="button" class="btn btn-success btn-sm"
                                            ng-click="model.followUser()">Follow</a>
@@ -57,23 +57,23 @@
                             </div>
                             <div class="delta-object-menu">
                                 <ul class="nav">
-                                    <li class="active">
+                                    <li ng-class="{active : model.isActive('PROFILE')}">
                                         <a ng-click="model.setContentType('PROFILE')" role="button">
                                             <i class="fa fa-home"></i>Profile</a>
                                     </li>
-                                    <li>
+                                    <li ng-class="{active : model.isActive('GAMES')}">
                                         <a ng-click="model.setContentType('GAMES')" role="button">
                                             <i class="fa fa-gamepad"></i>Games</a>
                                     </li>
-                                    <li>
+                                    <li ng-class="{active : model.isActive('LIKED')}">
                                         <a ng-click="model.setContentType('LIKED')" role="button">
                                             <i class="fa fa-bookmark"></i>Liked</a>
                                     </li>
-                                    <li>
+                                    <li ng-class="{active : model.isActive('FOLLOWING')}">
                                         <a ng-click="model.setContentType('FOLLOWING')" role="button">
                                             <i class="fa fa-users"></i>Following</a>
                                     </li>
-                                    <li>
+                                    <li ng-class="{active : model.isActive('FOLLOWERS')}">
                                         <a ng-click="model.setContentType('FOLLOWERS')" role="button">
                                             <i class="fa fa-users"></i>Followers</a>
                                     </li>
@@ -91,7 +91,7 @@
                                     <ng-include src="'views/user/templates/content/user.games.view.client.html'">
                                 </div>
                                 <div ng-switch-when="LIKED">
-                                    <ng-include src="'views/user/templates/content/user.liked.view.client.html'">
+                                    <ng-include src="'views/user/templates/content/user.games.view.client.html'">
                                 </div>
                                 <div ng-switch-when="FOLLOWING">
                                     <ng-include src="'views/user/templates/content/user.following.view.client.html'">
@@ -166,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="visible-lg visible-md col-md-1"></div>
+            <div class="visible-lg col-lg-1"></div>
         </div>
     </div>
     <div class="delta-navbar-bottom">

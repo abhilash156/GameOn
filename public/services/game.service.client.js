@@ -4,8 +4,6 @@
     function gameService($http, giantBombService) {
         var api = {
             "createGame": createGame,
-            "findGamesByUser": findGamesByUser,
-            "findLikedGamesByUser": findLikedGamesByUser,
             "findGameByExternalId": findGameByExternalId,
             "getFollowers": getFollowers,
             "getFollowing": getFollowing,
@@ -27,18 +25,6 @@
             var url = "/api/game";
 
             return $http.post(url, game).then(successCallback, errorCallback);
-        }
-
-        function findGamesByUser(userId) {
-            var url = "/api/user/" + userId + "/owned";
-
-            return $http.get(url).then(successCallback, errorCallback);
-        }
-
-        function findLikedGamesByUser(userId) {
-            var url = "/api/user/" + userId + "/liked";
-
-            return $http.get(url).then(successCallback, errorCallback);
         }
 
         function getFollowers(userId) {
