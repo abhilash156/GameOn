@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
+    cover: String,
     games: [{type: mongoose.Schema.Types.ObjectId, ref: "GameModel"}],
     liked: [{type: mongoose.Schema.Types.ObjectId, ref: "GameModel"}],
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],

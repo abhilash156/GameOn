@@ -12,7 +12,13 @@
             "checkLogin": checkLogin,
             "logout": logout,
             "updateUser": updateUser,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            "followUser": followUser,
+            "unFollowUser": unFollowUser,
+            "getFollowing": getFollowing,
+            "getFollowers": getFollowers,
+            "isFollowing": isFollowing,
+            "isFollower": isFollower
         };
         return api;
 
@@ -74,6 +80,42 @@
         }
 
 
+        function followUser(userId, userId2) {
+            var url = "/api/user/" + userId + "/follow/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function unFollowUser(userId, userId2) {
+            var url = "/api/user/" + userId + "/unfollow/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getFollowing(userId) {
+            var url = "/api/user/" + userId + "/following";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isFollowing(userId, userId2) {
+            var url = "/api/user/" + userId + "/following/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function isFollower(userId, userId2) {
+            var url = "/api/user/" + userId + "/followers/" + userId2;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getFollowers(userId) {
+            var url = "/api/user/" + userId + "/followers";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
         function successCallback(response) {
             return response.data;
         }
@@ -81,7 +123,5 @@
         function errorCallback() {
             return null;
         }
-
-
     }
 })();

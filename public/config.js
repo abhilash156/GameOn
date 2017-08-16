@@ -31,6 +31,14 @@
                     sessionUser: checkLogin
                 }
             })
+            .when("/profile/:username", {
+                templateUrl: "./views/user/templates/profile.view.client.html",
+                controller: "profileController",
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
+            })
             .when("/followed", {
                 templateUrl: "views/game/templates/user-followed.view.client.html",
                 controller: "userFollowedController",

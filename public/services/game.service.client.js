@@ -5,10 +5,6 @@
         var api = {
             "createGame": createGame,
             "findGameByExternalId": findGameByExternalId,
-            "getFollowers": getFollowers,
-            "getFollowing": getFollowing,
-            "isFollowing": isFollowing,
-            "isFollower": isFollower,
             "isLiked": isLiked,
             "isOwned": isOwned,
             "findGameById": findGameById,
@@ -27,12 +23,6 @@
             return $http.post(url, game).then(successCallback, errorCallback);
         }
 
-        function getFollowers(userId) {
-            var url = "/api/user/" + userId + "/followers";
-
-            return $http.get(url).then(successCallback, errorCallback);
-        }
-
         function likeGame(userId, gameId) {
             var url = "/api/user/" + userId + "/like/" + gameId;
 
@@ -47,24 +37,6 @@
 
         function unLikeGame(userId, gameId) {
             var url = "/api/user/" + userId + "/unlike/" + gameId;
-
-            return $http.get(url).then(successCallback, errorCallback);
-        }
-
-        function getFollowing(userId) {
-            var url = "/api/user/" + userId + "/following";
-
-            return $http.get(url).then(successCallback, errorCallback);
-        }
-
-        function isFollowing(userId, userId2) {
-            var url = "/api/user/" + userId + "/following/" + userId2;
-
-            return $http.get(url).then(successCallback, errorCallback);
-        }
-
-        function isFollower(userId, userId2) {
-            var url = "/api/user/" + userId + "/followers/" + userId2;
 
             return $http.get(url).then(successCallback, errorCallback);
         }

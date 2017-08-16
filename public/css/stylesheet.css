@@ -1,3 +1,9 @@
+body {
+    background: #E9EBEE;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -102,11 +108,6 @@ a:hover {
         color: #b2ebf2;
         background-color: #006064;
     }
-}
-
-body {
-    padding-top: 60px;
-    padding-bottom: 60px;
 }
 
 #header {

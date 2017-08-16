@@ -16,6 +16,8 @@ userModel.addGame = addGame;
 userModel.addLike = addLike;
 userModel.removeGame = removeGame;
 userModel.removeLike = removeLike;
+userModel.addFollow = addFollow;
+userModel.removeFollow = removeFollow;
 
 module.exports = userModel;
 
@@ -39,13 +41,43 @@ function addLike(userId, gameId) {
         })
 }
 
+function addFollow(userId, userId2) {
+    userModel.findById(userId2)
+        .then(function (user) {
+            user.followers.push(userId);
+            user.save();
+        });
+
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.following.push(userId2);
+            return user.save();
+        });
+}
+
+function removeFollow(userId, userId2) {
+    userModel.findById(userId2)
+        .then(function (user) {
+            var index = user.followers.indexOf(userId);
+            user.followers.splice(index, 1);
+            user.save();
+        });
+
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.following.indexOf(userId2);
+            user.following.splice(index, 1);
+            return user.save();
+        });
+}
+
 function removeGame(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
             var index = user.games.indexOf(gameId);
             user.games.splice(index, 1);
             return user.save();
-        })
+        });
 }
 
 function removeLike(userId, gameId) {

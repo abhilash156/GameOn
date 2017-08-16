@@ -1,7 +1,3 @@
-body {
-    background: #F1F3FA;
-}
-
 .delta-object {
     margin: 20px 0;
 }
@@ -33,12 +29,16 @@ body {
     margin-bottom: 7px;
 }
 
-.delta-object-title-job {
+.delta-object-sub-title {
     text-transform: uppercase;
     color: #00838f;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
+}
+
+.delta-navbar-username {
+    text-transform: uppercase;
 }
 
 .delta-object-buttons {

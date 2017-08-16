@@ -11,7 +11,7 @@ passport.deserializeUser(deserializeUser);
 app.post("/api/user", createUser);
 app.get("/api/user", findUserByUsername);
 app.post("/api/login", passport.authenticate('local'), login);
-app.post("/api/logout", logout);
+app.get("/api/logout", logout);
 app.get("/api/checkLogin", checkLogin);
 app.get("/api/user/:userId", findUserById);
 app.put("/api/user/:userId", updateUser);
@@ -29,6 +29,8 @@ app.get("/api/user/:userId/followers/:userId2", isFollower);
 app.get("/api/user/:userId/buy/:gameId", buyGame);
 app.get("/api/user/:userId/like/:gameId", likeGame);
 app.get("/api/user/:userId/unlike/:gameId", unLikeGame);
+app.get("/api/user/:userId/follow/:userId2", followUser);
+app.get("/api/user/:userId/unfollow/:userId2", unFollowUser);
 
 function createUser(request, response) {
     var user = request.body;
@@ -272,6 +274,30 @@ function getFollowers(request, response) {
         .exec()
         .then(function (user) {
             response.json(user.followers);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function followUser(request, response) {
+    var userId = request.params.userId;
+    var userId2 = request.params.userId2;
+
+    userModel.addFollow(userId, userId2)
+        .then(function (user) {
+            response.send(user);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function unFollowUser(request, response) {
+    var userId = request.params.userId;
+    var userId2 = request.params.userId2;
+
+    userModel.removeFollow(userId, userId2)
+        .then(function (user) {
+            response.send(user);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

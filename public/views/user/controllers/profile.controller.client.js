@@ -3,24 +3,63 @@
         .module("GameOn")
         .controller("profileController", profileController);
 
-    function profileController(userService, $location, sessionUser) {
+    function profileController(userService, $location, sessionUser, $routeParams) {
         var model = this;
 
-        model.userId = sessionUser._id;
-        model.user = sessionUser;
+        model.username = $routeParams['username'];
+        model.loggedUser = sessionUser;
         model.contentType = 'PROFILE';
-        model.followed = true;
-        model.games = null;
+        model.followed = false;
+        model.viewGames = null;
         model.ownedGames = null;
         model.likedGames = null;
+
+        model.viewUsers = [{
+            "username": "ezio",
+            "firstName": "Ezio",
+            "lastName": "Auditore",
+            "cover": "https://static.comicvine.com/uploads/original/11124/111240517/5025970-7320097309-latest",
+            "_id": "123"
+        }, {
+            "_id": "456",
+            "username": "knowsnothing",
+            "firstName": "Jon",
+            "lastName": "Snow",
+            "cover": "http://i.dailymail.co.uk/i/pix/2016/06/15/02/26FC2E3000000578-3641721-Snow_s_doppelganger_goes_by_the_name_of_facialfollicles_on_Insta-a-16_1465952970225.jpg"
+        }, {
+            "_id": "789",
+            "username": "bendtheknee",
+            "firstName": "Daenerys",
+            "lastName": "Targaryen",
+            "cover": "http://www.fandomisinthedetails.com/uploads/1/9/2/0/19201953/8161305_orig.jpg"
+        }];
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.isActive = isActive;
         model.setContentType = setContentType;
         model.logout = logout;
+        model.followUser = followUser;
+        model.unFollowUser = unFollowUser;
 
         function init() {
+            if (!model.username) {
+                model.userId = sessionUser._id;
+                model.user = sessionUser;
+            } else {
+                userService.findUserByUsername(model.username)
+                    .then(function (user) {
+                        model.userId = user._id;
+                        model.user = user;
+                        if (!model.user.cover) {
+                            model.user.cover = "http://www.imran.com/xyper_images/icon-user-default.png";
+                        }
+                        gameService.isFollowing(model.loggedUser._id, model.user._id)
+                            .then(function (value) {
+                                model.followed = value;
+                            });
+                    });
+            }
         }
 
         init();
@@ -86,6 +125,27 @@
 
         function isActive(contentType) {
             return model.contentType === contentType;
+        }
+
+        function followUser() {
+            userService.followUser(model.loggedUser._id, model.user._id)
+                .then(function () {
+                    model.followed = true;
+                });
+        }
+
+        function unFollowUser() {
+            userService.unFollowUser(model.loggedUser._id, model.user._id)
+                .then(function () {
+                    model.followed = false;
+                });
+        }
+
+        function isFollowing() {
+            gameService.isFollowing(model.loggedUser._id, model.user._id)
+                .then(function (value) {
+                    model.followed = value;
+                });
         }
     }
 })();
