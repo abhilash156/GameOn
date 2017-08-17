@@ -7,9 +7,11 @@ passport.use(new LocalStrategy(localStrategy));
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
+var bcrypt = require("bcrypt-nodejs");
 
 app.post("/api/user", createUser);
 app.get("/api/user", findUserByUsername);
+app.get("/api/users", getAllUsers);
 app.post("/api/login", passport.authenticate('local'), login);
 app.get("/api/logout", logout);
 app.get("/api/checkLogin", checkLogin);
@@ -34,7 +36,7 @@ app.get("/api/user/:userId/unfollow/:userId2", unFollowUser);
 
 function createUser(request, response) {
     var user = request.body;
-
+    user.password = bcrypt.hashSync(user.password);
     userModel.createUser(user)
         .then(function (newUser) {
             response.send(newUser);
@@ -61,12 +63,13 @@ function deserializeUser(user, done) {
 }
 
 function localStrategy(username, password, done) {
-    userModel.findUserByCredentials(username, password)
+    userModel.findUserByUsername(username)
         .then(function (user) {
-            if (!user) {
+            if(user && bcrypt.compareSync(password, user.password)) {
+                return done(null, user);
+            } else {
                 return done(null, false);
             }
-            return done(null, user);
         }, function (error) {
             if (error) {
                 return done(error);
@@ -111,7 +114,6 @@ function findUserById(request, response) {
 function updateUser(request, response) {
     var user = request.body;
     var userId = request.params.userId;
-
     userModel.updateUser(userId, user)
         .then(function () {
             response.sendStatus(200);
@@ -298,6 +300,15 @@ function unFollowUser(request, response) {
     userModel.removeFollow(userId, userId2)
         .then(function (user) {
             response.send(user);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function getAllUsers(request, response) {
+    userModel.getAllUsers()
+        .then(function (users) {
+            response.send(users);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

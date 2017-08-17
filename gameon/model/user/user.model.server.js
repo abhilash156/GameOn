@@ -18,6 +18,7 @@ userModel.removeGame = removeGame;
 userModel.removeLike = removeLike;
 userModel.addFollow = addFollow;
 userModel.removeFollow = removeFollow;
+userModel.getAllUsers = getAllUsers;
 
 module.exports = userModel;
 
@@ -114,4 +115,9 @@ function updateUser(userId, user) {
 function deleteUser(userId) {
 
     return userModel.remove({_id: userId});
+}
+
+function getAllUsers() {
+
+    return userModel.find();
 }

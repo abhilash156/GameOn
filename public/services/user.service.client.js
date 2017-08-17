@@ -18,7 +18,8 @@
             "getFollowing": getFollowing,
             "getFollowers": getFollowers,
             "isFollowing": isFollowing,
-            "isFollower": isFollower
+            "isFollower": isFollower,
+            "getUsers": getUsers
         };
         return api;
 
@@ -30,6 +31,12 @@
 
         function findUserById(userId) {
             var url = "/api/user/" + userId;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getUsers() {
+            var url = "/api/users";
 
             return $http.get(url).then(successCallback, errorCallback);
         }

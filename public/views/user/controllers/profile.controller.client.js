@@ -8,16 +8,16 @@
 
         model.username = $routeParams['username'];
         model.loggedUser = sessionUser;
-        model.contentType = 'GAMES';
+        model.contentType = 'PROFILE';
         model.followed = false;
         model.viewGames = null;
+        model.viewUsers = null;
         model.ownedGames = null;
         model.likedGames = null;
         model.followers = null;
         model.following = null;
         model.isLoggedUser = false;
-
-        model.viewUsers = null;
+        model.isAdmin = false;
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
@@ -27,14 +27,19 @@
         model.followUser = followUser;
         model.unFollowUser = unFollowUser;
 
+
         function init() {
             if ((!model.username) || (model.username === sessionUser.username)) {
                 model.userId = sessionUser._id;
                 model.user = sessionUser;
                 model.isLoggedUser = true;
+                if(model.user.userType === 'ADMIN') {
+                    model.isAdmin = true;
+                }
             } else {
                 userService.findUserByUsername(model.username)
                     .then(function (user) {
+                        model.contentType = 'GAMES';
                         model.isLoggedUser = false;
                         model.userId = user._id;
                         model.user = user;
@@ -45,10 +50,10 @@
                             .then(function (value) {
                                 model.followed = value;
                             });
+                        loadUserGames();
+                        model.viewGames = model.ownedGames;
                     });
             }
-            loadUserGames();
-            model.viewGames = model.ownedGames;
         }
 
         init();
@@ -73,15 +78,7 @@
             userService.getFollowers(model.userId)
                 .then(function (users) {
                     model.followers = users;
-                    for (var i = 0; i < model.followers.length; i++) {
-                        model.followers[i].isLoggedUserFollowing = false;
-                        for (var j = 0; j < model.user.following.length; j++) {
-                            if (model.followers[i]._id === model.user.following[j]) {
-                                model.followers[i].isLoggedUserFollowing = true;
-                                break;
-                            }
-                        }
-                    }
+                    model.viewUsers = model.followers;
                 });
         }
 
@@ -89,13 +86,13 @@
             userService.getFollowing(model.userId)
                 .then(function (users) {
                     model.following = users;
+                    model.viewUsers = model.following;
                 });
         }
 
         function updateUser(user) {
             userService.updateUser(model.userId, user)
                 .then(function () {
-                    $location.url("profile");
                 });
         }
 
@@ -135,12 +132,19 @@
                 case 'FOLLOWERS':
                     if (model.followers === null) {
                         loadFollowers();
+                    } else {
+                        model.viewUsers = model.followers;
                     }
                     break;
                 case 'FOLLOWING':
                     if (model.following === null) {
                         loadFollowing();
+                    } else {
+                        model.viewUsers = model.following;
                     }
+                    break;
+                case 'USERS':
+                    loadAllUsers();
                     break;
             }
         }
@@ -167,6 +171,13 @@
             userService.isFollowing(model.loggedUser._id, model.user._id)
                 .then(function (value) {
                     model.followed = value;
+                });
+        }
+
+        function loadAllUsers() {
+            userService.getUsers()
+                .then(function (users) {
+                    model.viewUsers = users;
                 });
         }
     }

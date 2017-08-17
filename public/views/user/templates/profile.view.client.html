@@ -32,11 +32,12 @@
                             </div>
                             <div class="delta-object-menu">
                                 <ul class="nav">
-                                    <li ng-show="model.isLoggedUser" ng-class="{active : model.isActive('PROFILE')}">
+                                    <li ng-show="model.isLoggedUser || model.isAdmin"
+                                        ng-class="{active : model.isActive('PROFILE')}">
                                         <a ng-click="model.setContentType('PROFILE')" role="button">
                                             <i class="fa fa-home"></i>Profile</a>
                                     </li>
-                                    <li ng-class="{active : model.isActive('GAMES')}">
+                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('GAMES')}">
                                         <a ng-click="model.setContentType('GAMES')" role="button">
                                             <i class="fa fa-gamepad"></i>Games</a>
                                     </li>
@@ -52,7 +53,7 @@
                                         <a ng-click="model.setContentType('FOLLOWERS')" role="button">
                                             <i class="fa fa-users"></i>Followers</a>
                                     </li>
-                                    <li ng-show="model.isAdmin" g-class="{active : model.isActive('USERS')}">
+                                    <li ng-show="model.isAdmin" ng-class="{active : model.isActive('USERS')}">
                                         <a ng-click="model.setContentType('USERS')" role="button">
                                             <i class="fa fa-users"></i>Users</a>
                                     </li>
@@ -73,10 +74,13 @@
                                     <ng-include src="'views/user/templates/content/user.games.view.client.html'">
                                 </div>
                                 <div ng-switch-when="FOLLOWING">
-                                    <ng-include src="'views/user/templates/content/user.following.view.client.html'">
+                                    <ng-include src="'views/user/templates/content/user.follows.view.client.html'">
                                 </div>
                                 <div ng-switch-when="FOLLOWERS">
-                                    <ng-include src="'views/user/templates/content/user.followers.view.client.html'">
+                                    <ng-include src="'views/user/templates/content/user.follows.view.client.html'">
+                                </div>
+                                <div ng-switch-when="USERS">
+                                    <ng-include src="'views/user/templates/content/user.follows.view.client.html'">
                                 </div>
                             </div>
                         </div>

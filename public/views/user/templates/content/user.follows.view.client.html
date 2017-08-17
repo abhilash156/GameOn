@@ -1,0 +1,15 @@
+<ul class="list-group">
+    <li ng-repeat="viewUser in model.viewUsers" class="list-group-item">
+        <div class="row">
+            <div class="col-xs-2">
+                <img class="delta-list-image" ng-src="{{viewUser.cover}}" width="80" height="80">
+            </div>
+            <div class="col-xs-8">
+                <a href="#!/profile/{{viewUser.username}}">
+                    <div class="delta-object-title-name">{{viewUser.firstName}} {{viewUser.lastName}}</div>
+                </a>
+                <div class="delta-object-sub-title">{{viewUser.username}}</div>
+            </div>
+        </div>
+    </li>
+</ul>

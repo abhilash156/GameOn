@@ -14,6 +14,7 @@
         model.likeGame = likeGame;
         model.unLikeGame = unLikeGame;
         model.buyGame = buyGame;
+        model.loggedUser = sessionUser;
 
         function init() {
             gameService.findGameById(model.gameId)
