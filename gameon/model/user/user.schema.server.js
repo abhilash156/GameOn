@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 
 var userSchema = mongoose.Schema({
-    username: {type: String, unique: true},
-    password: String,
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true},
     firstName: String,
     lastName: String,
     email: String,
@@ -12,7 +12,10 @@ var userSchema = mongoose.Schema({
     liked: [{type: mongoose.Schema.Types.ObjectId, ref: "GameModel"}],
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],
     following: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],
-    dob: Date,
+    google: {
+        id: String,
+        token: String
+    },
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 

@@ -3,6 +3,7 @@ var app = require("../../express");
 var userModel = require("../model/user/user.model.server");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use(new LocalStrategy(localStrategy));
 
 passport.serializeUser(serializeUser);
@@ -12,6 +13,7 @@ var bcrypt = require("bcrypt-nodejs");
 app.post("/api/user", createUser);
 app.get("/api/user", findUserByUsername);
 app.get("/api/users", getAllUsers);
+app.get("/auth/google", passport.authenticate('google', {scope: ['profile', 'email']}));
 app.post("/api/login", passport.authenticate('local'), login);
 app.get("/api/logout", logout);
 app.get("/api/checkLogin", checkLogin);
@@ -33,6 +35,18 @@ app.get("/api/user/:userId/like/:gameId", likeGame);
 app.get("/api/user/:userId/unlike/:gameId", unLikeGame);
 app.get("/api/user/:userId/follow/:userId2", followUser);
 app.get("/api/user/:userId/unfollow/:userId2", unFollowUser);
+app.get('/google/callback', passport.authenticate('google', {
+    successRedirect: '#!/profile',
+    failureRedirect: '#!/login'
+}));
+
+var googleConfig = {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+};
+
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 function createUser(request, response) {
     var user = request.body;
@@ -43,6 +57,44 @@ function createUser(request, response) {
         }, function (error) {
             response.sendStatus(404).error(error);
         });
+}
+
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }
 
 function serializeUser(user, done) {
@@ -65,7 +117,7 @@ function deserializeUser(user, done) {
 function localStrategy(username, password, done) {
     userModel.findUserByUsername(username)
         .then(function (user) {
-            if(user && bcrypt.compareSync(password, user.password)) {
+            if (user && bcrypt.compareSync(password, user.password)) {
                 return done(null, user);
             } else {
                 return done(null, false);
@@ -78,6 +130,12 @@ function localStrategy(username, password, done) {
 }
 
 function login(request, response) {
+    var user = request.user;
+    response.json(user);
+}
+
+function loginWithGoogle(request, response) {
+    console.log("Google");
     var user = request.user;
     response.json(user);
 }

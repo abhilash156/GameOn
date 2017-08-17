@@ -1,3 +1,6 @@
+<div class="delta-navbar-top">
+    <ng-include src="'views/common/templates/navbar-top-anon.view.client.html'">
+</div>
 <div class="container-fluid">
     <div class="delta-login row">
         <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
@@ -19,6 +22,9 @@
                    placeholder="Password"
                    required>
             <a class="btn btn-primary btn-block" ng-click="model.login(model.user)" type="submit">Login</a>
+
+            <a href="/auth/google" class="btn btn-danger btn-block"><span class="fa fa-google-plus"></span>Google</a>
+
             <a class="btn btn-success btn-block" type="submit" href="#!/register">Register</a>
         </div>
         <div class="visible-lg visible-md col-lg-2 col-md-1"></div>

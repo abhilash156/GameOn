@@ -19,6 +19,7 @@ userModel.removeLike = removeLike;
 userModel.addFollow = addFollow;
 userModel.removeFollow = removeFollow;
 userModel.getAllUsers = getAllUsers;
+userModel.findUserByGoogleId = findUserByGoogleId;
 
 module.exports = userModel;
 
@@ -93,6 +94,11 @@ function removeLike(userId, gameId) {
 function findUserById(userId) {
 
     return userModel.findById(userId);
+}
+
+function findUserByGoogleId(googleId) {
+
+    return userModel.findOne({'google.id': googleId});
 }
 
 function findUserByUsername(username) {
