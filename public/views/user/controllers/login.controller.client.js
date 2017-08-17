@@ -8,8 +8,9 @@
         model.login = login;
 
         function init() {
-            if(sessionUser) {
+            if (sessionUser) {
                 $location.url("profile");
+            } else {
             }
         }
 

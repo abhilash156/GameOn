@@ -163,6 +163,10 @@ a:hover {
     border-radius: 5px;
 }
 
+.delta-inline-block {
+    display: inline;
+}
+
 .delta-navbar-username:hover, .delta-navbar-username:focus {
     color: #FFFFFF;
     background: #0097a7;

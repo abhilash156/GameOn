@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="delta-navbar-user">
+            <div class="row">
+                <div class="col-xs-2">
+                    <a class="delta-navbar-username" href="/">
+                        <img src="https://raw.githubusercontent.com/abhilash156/GameOn/master/public/images/favicon-96x96.png"
+                             class="delta-navbar-userpic" alt="">
+                        <h5 class="delta-inline-block hidden-xs">GameOn</h5>
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <div class="input-group">
+                        <input ng-model=" model.searchTerm" type="text" class="form-control">
+                        <span class="input-group-btn">
+                        <a href="#!/search?q={{model.searchTerm}}" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                    </span>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <a class="delta-navbar-username pull-right" href="#!/profile">
+                        <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
+                        <h5 class="delta-inline-block hidden-xs">{{model.loggedUser.username}}</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+</nav>

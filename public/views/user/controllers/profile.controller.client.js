@@ -17,25 +17,7 @@
         model.following = null;
         model.isLoggedUser = false;
 
-        model.viewUsers = [{
-            "username": "ezio",
-            "firstName": "Ezio",
-            "lastName": "Auditore",
-            "cover": "https://static.comicvine.com/uploads/original/11124/111240517/5025970-7320097309-latest",
-            "_id": "123"
-        }, {
-            "_id": "456",
-            "username": "knowsnothing",
-            "firstName": "Jon",
-            "lastName": "Snow",
-            "cover": "http://i.dailymail.co.uk/i/pix/2016/06/15/02/26FC2E3000000578-3641721-Snow_s_doppelganger_goes_by_the_name_of_facialfollicles_on_Insta-a-16_1465952970225.jpg"
-        }, {
-            "_id": "789",
-            "username": "bendtheknee",
-            "firstName": "Daenerys",
-            "lastName": "Targaryen",
-            "cover": "http://www.fandomisinthedetails.com/uploads/1/9/2/0/19201953/8161305_orig.jpg"
-        }];
+        model.viewUsers = null;
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
@@ -178,17 +160,6 @@
             userService.unFollowUser(model.loggedUser._id, followId)
                 .then(function () {
                     model.followed = false;
-                });
-        }
-
-        function searchPhotos(searchTerm) {
-            flickrService
-                .searchPhotos(searchTerm)
-                .then(function (response) {
-                    var data = response.data.replace("jsonFlickrApi(", "");
-                    data = data.substring(0, data.length - 1);
-                    data = JSON.parse(data);
-                    model.photos = data.photos;
                 });
         }
 

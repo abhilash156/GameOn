@@ -1,17 +1,7 @@
 <div>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="row delta-margin-top">
-                <div class="col-xs-1 pull-left">
-                    <a href="#!/game"><span
-                            class="delta-navbar-icon glyphicon glyphicon-chevron-left pull-left"></span></a>
-                </div>
-                <div class="col-lg-3 col-xs-6">
-                    <p class="accent-text pull-left"><b>{{ model.gameInfo.name }}</b></p>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="delta-navbar-top">
+        <ng-include src="'views/common/templates/navbar-top.view.client.html'">
+    </div>
     <div class="container-fluid">
         <!--{{ model.gameInfo }}-->
         <!--{{ model.game }}-->
@@ -74,9 +64,5 @@
             </div>
             <div class="visible-lg visible-md col-md-1"></div>
         </div>
-    </div>
-
-    <div class="delta-navbar-bottom">
-        <ng-include src="'views/common/templates/navbar-bottom.view.client.html'">
     </div>
 </div>

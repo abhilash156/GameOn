@@ -3,11 +3,12 @@
         .module("GameOn")
         .controller("searchController", searchController);
 
-    function searchController($location, $routeParams, giantBombService, gameService) {
+    function searchController($location, $routeParams, giantBombService, gameService, sessionUser) {
         var model = this;
         model.searchGames = searchGames;
         model.getGameURL = getGameURL;
         model.searchTerm = $routeParams["q"];
+        model.loggedUser = sessionUser;
 
 
         function init() {

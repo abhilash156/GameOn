@@ -1,30 +1,7 @@
 <div class="delta-content">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
-                    <p class="accent-text pull-left"><b>GameOn</b></p>
-                </div>
-                <div class="col-lg-6 col-xs-6">
-                    <div class="input-group delta-navbar-user">
-                        <input ng-model="model.searchTerm" type="text" class="form-control">
-                        <span class="input-group-btn">
-                        <a href="#!/search?q={{model.searchTerm}}" class="btn btn-default" type="button">
-                            <span class="glyphicon glyphicon-search"></span></a>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-xs-4 pull-right">
-                    <div class="delta-navbar-user">
-                        <a class="delta-navbar-username pull-right" href="#!/profile">
-                            <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
-                            {{model.loggedUser.username}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="delta-navbar-top">
+        <ng-include src="'views/common/templates/navbar-top.view.client.html'">
+    </div>
     <div class="container">
         <div class="delta-object-content">
             <ul ng-repeat="game in model.searchResult" class="list-group">

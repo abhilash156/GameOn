@@ -115,13 +115,12 @@
         return deferred.promise;
     }
 
-    function checkLogin(userService, $q, $location) {
+    function checkLogin(userService, $q) {
         var deferred = $q.defer();
         userService.checkLogin()
             .then(function (user) {
                 if (user === '0') {
-                    deferred.reject();
-                    //$location.url("/login");
+                    deferred.resolve(null);
                 } else {
                     deferred.resolve(user);
                 }
