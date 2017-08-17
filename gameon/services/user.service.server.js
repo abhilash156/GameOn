@@ -36,15 +36,21 @@ app.get("/api/user/:userId/unlike/:gameId", unLikeGame);
 app.get("/api/user/:userId/follow/:userId2", followUser);
 app.get("/api/user/:userId/unfollow/:userId2", unFollowUser);
 app.get('/google/callback', passport.authenticate('google', {
-    successRedirect: '#!/profile',
-    failureRedirect: '#!/login'
+    successRedirect: '/#!/profile',
+    failureRedirect: '/#!/login'
 }));
 
 var googleConfig = {
+    clientID: '374736085891-gbc0opl6pfl4llknf6ce5p1gjcmggod7.apps.googleusercontent.com',
+    clientSecret: 'c3ibpRcGD2zKlpXWKYRDdgf2',
+    callbackURL: 'http://127.0.0.1:3030/google/callback'
+};
+
+/*var googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK_URL
-};
+};*/
 
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
@@ -61,38 +67,44 @@ function createUser(request, response) {
 
 
 function googleStrategy(token, refreshToken, profile, done) {
+    console.log(profile);
     userModel
         .findUserByGoogleId(profile.id)
         .then(
-            function(user) {
-                if(user) {
+            function (user) {
+                if (user) {
                     return done(null, user);
                 } else {
                     var email = profile.emails[0].value;
                     var emailParts = email.split("@");
                     var newGoogleUser = {
-                        username:  emailParts[0],
+                        username: emailParts[0],
                         firstName: profile.name.givenName,
-                        lastName:  profile.name.familyName,
-                        email:     email,
+                        lastName: profile.name.familyName,
+                        cover: profile.photos[0].value,
+                        email: email,
                         google: {
-                            id:    profile.id,
+                            id: profile.id,
                             token: token
                         }
                     };
                     return userModel.createUser(newGoogleUser);
                 }
             },
-            function(err) {
-                if (err) { return done(err); }
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
             }
         )
         .then(
-            function(user){
+            function (user) {
                 return done(null, user);
             },
-            function(err){
-                if (err) { return done(err); }
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
             }
         );
 }
@@ -134,19 +146,13 @@ function login(request, response) {
     response.json(user);
 }
 
-function loginWithGoogle(request, response) {
-    console.log("Google");
-    var user = request.user;
-    response.json(user);
-}
-
 function logout(request, response) {
     request.logOut();
     response.send(200);
 }
 
-function checkLogin(req, res) {
-    res.send(req.isAuthenticated() ? req.user : '0');
+function checkLogin(request, response) {
+    response.send(request.isAuthenticated() ? request.user : '0');
 }
 
 function findUserByUsername(request, response) {
