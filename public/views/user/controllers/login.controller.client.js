@@ -17,7 +17,10 @@
                 .then(function (loginUser) {
                     if (loginUser === '') {
                         model.errorMessage = "Invalid Username or Password";
-                    } else {
+                    } else if (loginUser === 401) {
+                        model.errorMessage = "Invalid Username or Password";
+                    }
+                    else {
                         $location.url("profile");
                     }
                 });

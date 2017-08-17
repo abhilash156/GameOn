@@ -8,11 +8,14 @@
 
         model.username = $routeParams['username'];
         model.loggedUser = sessionUser;
-        model.contentType = 'PROFILE';
+        model.contentType = 'GAMES';
         model.followed = false;
         model.viewGames = null;
         model.ownedGames = null;
         model.likedGames = null;
+        model.followers = null;
+        model.following = null;
+        model.isLoggedUser = false;
 
         model.viewUsers = [{
             "username": "ezio",
@@ -43,23 +46,27 @@
         model.unFollowUser = unFollowUser;
 
         function init() {
-            if (!model.username) {
+            if ((!model.username) || (model.username === sessionUser.username)) {
                 model.userId = sessionUser._id;
                 model.user = sessionUser;
+                model.isLoggedUser = true;
             } else {
                 userService.findUserByUsername(model.username)
                     .then(function (user) {
+                        model.isLoggedUser = false;
                         model.userId = user._id;
                         model.user = user;
                         if (!model.user.cover) {
                             model.user.cover = "http://www.imran.com/xyper_images/icon-user-default.png";
                         }
-                        gameService.isFollowing(model.loggedUser._id, model.user._id)
+                        userService.isFollowing(model.loggedUser._id, model.user._id)
                             .then(function (value) {
                                 model.followed = value;
                             });
                     });
             }
+            loadUserGames();
+            model.viewGames = model.ownedGames;
         }
 
         init();
@@ -77,6 +84,20 @@
                 .then(function (games) {
                     model.likedGames = games;
                     model.viewGames = model.likedGames;
+                });
+        }
+
+        function loadFollowers() {
+            userService.getFollowers(model.userId)
+                .then(function (users) {
+                    model.followers = users;
+                });
+        }
+
+        function loadFollowing() {
+            userService.getFollowing(model.userId)
+                .then(function (users) {
+                    model.following = users;
                 });
         }
 
@@ -120,6 +141,16 @@
                         model.viewGames = model.likedGames;
                     }
                     break;
+                case 'FOLLOWERS':
+                    if (model.followers === null) {
+                        loadFollowers();
+                    }
+                    break;
+                case 'FOLLOWING':
+                    if (model.following === null) {
+                        loadFollowing();
+                    }
+                    break;
             }
         }
 
@@ -142,7 +173,7 @@
         }
 
         function isFollowing() {
-            gameService.isFollowing(model.loggedUser._id, model.user._id)
+            userService.isFollowing(model.loggedUser._id, model.user._id)
                 .then(function (value) {
                     model.followed = value;
                 });

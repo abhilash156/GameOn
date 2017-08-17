@@ -44,7 +44,13 @@
             var url = "/api/login";
 
             return $http.post(url, {username: username, password: password})
-                .then(successCallback, errorCallback);
+                .then(successCallback, function (response, error) {
+                    if (response.status === 401) {
+                        return 401;
+                    } else {
+                        errorCallback();
+                    }
+                });
         }
 
         function getOwnedGamesByUser(userId) {

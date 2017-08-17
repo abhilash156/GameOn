@@ -1,14 +1,17 @@
 <div class="delta-content">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <div class="row delta-margin-top">
-                <div class="col-lg-2 col-xs-2 pull-left">
+            <div class="row">
+                <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
                     <p class="accent-text pull-left"><b>Profile</b></p>
                 </div>
                 <div class="col-lg-2 col-xs-2 pull-right">
-                    <a class="accent-text pull-right delta-navbar-username" href="#!/profile">
-                        {{model.loggedUser.username}}
-                    </a>
+                    <div class="delta-navbar-user">
+                        <a class="delta-navbar-username pull-right" href="#!/profile">
+                            <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
+                            {{model.loggedUser.username}}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,7 +32,7 @@
                                 </div>
                                 <div class="delta-object-sub-title">{{ model.user.username }}</div>
                             </div>
-                            <div class="delta-object-buttons">
+                            <div ng-show="!model.isLoggedUser" class="delta-object-buttons">
                                 <div ng-switch="model.followed">
                                     <div ng-switch-when=false>
                                         <a role="button" class="btn btn-success btn-sm"
@@ -43,7 +46,7 @@
                             </div>
                             <div class="delta-object-menu">
                                 <ul class="nav">
-                                    <li ng-class="{active : model.isActive('PROFILE')}">
+                                    <li ng-show="model.isLoggedUser" ng-class="{active : model.isActive('PROFILE')}">
                                         <a ng-click="model.setContentType('PROFILE')" role="button">
                                             <i class="fa fa-home"></i>Profile</a>
                                     </li>
