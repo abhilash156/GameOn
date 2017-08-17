@@ -162,7 +162,7 @@ a:hover {
     border-radius: 5px;
 }
 
-.delta-navbar-username a:focus, a:hover {
+.delta-navbar-username > a:focus, a:hover {
     color: #FFFFFF;
     background: #0097a7;
 }

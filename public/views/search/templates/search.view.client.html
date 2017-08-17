@@ -1,0 +1,35 @@
+<div class="delta-content">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
+                    <p class="accent-text pull-left"><b>Profile</b></p>
+                </div>
+                <div class="col-lg-4 col-xs-4 pull-right">
+                    <div class="delta-navbar-user">
+                        <a class="delta-navbar-username pull-right" href="#!/profile">
+                            <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
+                            {{model.loggedUser.username}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="visible-lg col-xs-1 col-md-2"></div>
+            <div class="col-xs-10 col-lg-8 col-md-8">
+                <div class="input-group delta-navbar-user">
+                    <img src="">
+                    <input ng-model="searchText" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <a ng-click="model.searchPhotos(searchText)" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span></a>
+                        </span>
+                </div>
+            </div>
+            <div class="visible-lg col-xs-1 col-md-2"></div>
+        </div>
+    </div>
+</div>

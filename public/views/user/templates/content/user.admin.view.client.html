@@ -1,5 +1,5 @@
 <ul class="list-group">
-    <li ng-repeat="viewUser in model.following" class="list-group-item">
+    <li ng-repeat="viewUser in model.followers" class="list-group-item">
         <div class="row">
             <div class="col-xs-2">
                 <img class="delta-list-image" ng-src="{{viewUser.cover}}" width="80" height="80">
@@ -10,7 +10,10 @@
             </div>
             <div class="col-xs-2">
                 <div class="delta-object-buttons">
-                    <a role="button" class="btn btn-danger btn-sm" ng-click="model.unFollowUser(viewUser._id)">Unfollow</a>
+                    <a ng-show="viewUser.isLoggedUserFollowing"
+                       role="button" class="btn btn-danger btn-sm" ng-click="model.unFollowUser(viewUser._id)">Unfollow</a>
+                    <a ng-show="!viewUser.isLoggedUserFollowing"
+                       role="button" class="btn btn-success btn-sm" ng-click="model.followUser(viewUser._id)">Follow</a>
                 </div>
             </div>
         </div>

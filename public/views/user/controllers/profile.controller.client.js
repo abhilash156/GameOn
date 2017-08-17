@@ -91,6 +91,15 @@
             userService.getFollowers(model.userId)
                 .then(function (users) {
                     model.followers = users;
+                    for (var i = 0; i < model.followers.length; i++) {
+                        model.followers[i].isLoggedUserFollowing = false;
+                        for (var j = 0; j < model.user.following.length; j++) {
+                            if (model.followers[i]._id === model.user.following[j]) {
+                                model.followers[i].isLoggedUserFollowing = true;
+                                break;
+                            }
+                        }
+                    }
                 });
         }
 
@@ -158,17 +167,28 @@
             return model.contentType === contentType;
         }
 
-        function followUser() {
-            userService.followUser(model.loggedUser._id, model.user._id)
+        function followUser(followId) {
+            userService.followUser(model.loggedUser._id, followId)
                 .then(function () {
                     model.followed = true;
                 });
         }
 
-        function unFollowUser() {
-            userService.unFollowUser(model.loggedUser._id, model.user._id)
+        function unFollowUser(followId) {
+            userService.unFollowUser(model.loggedUser._id, followId)
                 .then(function () {
                     model.followed = false;
+                });
+        }
+
+        function searchPhotos(searchTerm) {
+            flickrService
+                .searchPhotos(searchTerm)
+                .then(function (response) {
+                    var data = response.data.replace("jsonFlickrApi(", "");
+                    data = data.substring(0, data.length - 1);
+                    data = JSON.parse(data);
+                    model.photos = data.photos;
                 });
         }
 

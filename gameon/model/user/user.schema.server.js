@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     cover: String,
+    userType: {type: String, enum: ['PLAYER', 'DEVELOPER', 'ADMIN']},
     games: [{type: mongoose.Schema.Types.ObjectId, ref: "GameModel"}],
     liked: [{type: mongoose.Schema.Types.ObjectId, ref: "GameModel"}],
     followers: [{type: mongoose.Schema.Types.ObjectId, ref: "UserModel"}],

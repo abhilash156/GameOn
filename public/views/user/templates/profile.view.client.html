@@ -5,7 +5,16 @@
                 <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
                     <p class="accent-text pull-left"><b>Profile</b></p>
                 </div>
-                <div class="col-lg-2 col-xs-2 pull-right">
+                <div class="col-lg-6 col-xs-6">
+                    <div class="input-group delta-navbar-user">
+                        <input ng-model="searchText" type="text" class="form-control">
+                        <span class="input-group-btn">
+                        <a ng-click="model.searchPhotos(searchText)" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-4 pull-right">
                     <div class="delta-navbar-user">
                         <a class="delta-navbar-username pull-right" href="#!/profile">
                             <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
@@ -36,11 +45,11 @@
                                 <div ng-switch="model.followed">
                                     <div ng-switch-when=false>
                                         <a role="button" class="btn btn-success btn-sm"
-                                           ng-click="model.followUser()">Follow</a>
+                                           ng-click="model.followUser(model.userId)">Follow</a>
                                     </div>
                                     <div ng-switch-when=true>
                                         <a role="button" class="btn btn-danger btn-sm"
-                                           ng-click="model.unFollowUser()">Unfollow</a>
+                                           ng-click="model.unFollowUser(model.userId)">Unfollow</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,17 +63,21 @@
                                         <a ng-click="model.setContentType('GAMES')" role="button">
                                             <i class="fa fa-gamepad"></i>Games</a>
                                     </li>
-                                    <li ng-class="{active : model.isActive('LIKED')}">
+                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('LIKED')}">
                                         <a ng-click="model.setContentType('LIKED')" role="button">
                                             <i class="fa fa-bookmark"></i>Liked</a>
                                     </li>
-                                    <li ng-class="{active : model.isActive('FOLLOWING')}">
+                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('FOLLOWING')}">
                                         <a ng-click="model.setContentType('FOLLOWING')" role="button">
                                             <i class="fa fa-users"></i>Following</a>
                                     </li>
-                                    <li ng-class="{active : model.isActive('FOLLOWERS')}">
+                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('FOLLOWERS')}">
                                         <a ng-click="model.setContentType('FOLLOWERS')" role="button">
                                             <i class="fa fa-users"></i>Followers</a>
+                                    </li>
+                                    <li ng-show="model.isAdmin" g-class="{active : model.isActive('USERS')}">
+                                        <a ng-click="model.setContentType('USERS')" role="button">
+                                            <i class="fa fa-users"></i>Users</a>
                                     </li>
                                 </ul>
                             </div>

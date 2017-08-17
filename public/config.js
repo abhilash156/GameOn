@@ -4,8 +4,8 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "./views/user/templates/login.view.client.html",
-                controller: "loginController",
+                templateUrl: "./views/search/templates/search.view.client.html",
+                controller: "searchController",
                 controllerAs: "model"
             })
             .when("/login", {
