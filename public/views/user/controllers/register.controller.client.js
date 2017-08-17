@@ -3,13 +3,15 @@
         .module("GameOn")
         .controller("registerController", registerController);
 
-    function registerController(userService, $location) {
+    function registerController(userService, $location, sessionUser) {
         var model = this;
 
         model.registerUser = registerUser;
 
         function init() {
-
+            if(sessionUser) {
+                $location.url("profile");
+            }
         }
 
         init();

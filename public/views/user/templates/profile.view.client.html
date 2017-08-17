@@ -7,9 +7,9 @@
                 </div>
                 <div class="col-lg-6 col-xs-6">
                     <div class="input-group delta-navbar-user">
-                        <input ng-model="searchText" type="text" class="form-control">
+                        <input ng-model="model.searchTerm" type="text" class="form-control">
                         <span class="input-group-btn">
-                        <a ng-click="model.searchPhotos(searchText)" class="btn btn-default" type="button">
+                        <a href="#!/search?q={{model.searchTerm}}" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search"></span></a>
                         </span>
                     </div>

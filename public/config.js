@@ -4,31 +4,51 @@
     function configuration($routeProvider) {
         $routeProvider
             .when("/", {
+                templateUrl: "./views/search/templates/home.view.client.html",
+                controller: "homeController",
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
+            })
+            .when("/search", {
                 templateUrl: "./views/search/templates/search.view.client.html",
                 controller: "searchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
             .when("/login", {
                 templateUrl: "./views/user/templates/login.view.client.html",
                 controller: "loginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
             .when("/default", {
                 templateUrl: "./views/user/templates/login.view.client.html",
                 controller: "loginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
             .when("/register", {
                 templateUrl: "./views/user/templates/register.view.client.html",
                 controller: "registerController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLogin
+                }
             })
             .when("/profile", {
                 templateUrl: "./views/user/templates/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/profile/:username", {
@@ -36,7 +56,7 @@
                 controller: "profileController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/followed", {
@@ -44,7 +64,7 @@
                 controller: "userFollowedController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/followers", {
@@ -52,7 +72,7 @@
                 controller: "userFollowersController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/game/new", {
@@ -60,7 +80,7 @@
                 controller: "newGameController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/game/:wid", {
@@ -68,7 +88,7 @@
                 controller: "editGameController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/game/:wid/detail", {
@@ -76,9 +96,23 @@
                 controller: "gameDetailController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             });
+    }
+
+    function checkLoginStrict(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService.checkLogin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url("/login");
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
     }
 
     function checkLogin(userService, $q, $location) {
@@ -87,7 +121,7 @@
             .then(function (user) {
                 if (user === '0') {
                     deferred.reject();
-                    $location.url("/login");
+                    //$location.url("/login");
                 } else {
                     deferred.resolve(user);
                 }

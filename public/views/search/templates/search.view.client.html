@@ -3,7 +3,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
-                    <p class="accent-text pull-left"><b>Profile</b></p>
+                    <p class="accent-text pull-left"><b>GameOn</b></p>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <div class="input-group delta-navbar-user">
+                        <input ng-model="model.searchTerm" type="text" class="form-control">
+                        <span class="input-group-btn">
+                        <a href="#!/search?q={{model.searchTerm}}" class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span></a>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-xs-4 pull-right">
                     <div class="delta-navbar-user">
@@ -16,20 +25,24 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="visible-lg col-xs-1 col-md-2"></div>
-            <div class="col-xs-10 col-lg-8 col-md-8">
-                <div class="input-group delta-navbar-user">
-                    <img src="">
-                    <input ng-model="searchText" type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <a ng-click="model.searchPhotos(searchText)" class="btn btn-default" type="button">
-                            <span class="glyphicon glyphicon-search"></span></a>
-                        </span>
-                </div>
-            </div>
-            <div class="visible-lg col-xs-1 col-md-2"></div>
+    <div class="container">
+        <div class="delta-object-content">
+            <ul ng-repeat="game in model.searchResult" class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img class="delta-list-image" ng-src="{{game.image.small_url}}" width="60" height="80">
+                        </div>
+                        <div class="col-xs-8">
+                            <a ng-click="model.getGameURL(game.id)" role="button"><h4>{{game.name}}</h4></a>
+                            <p>{{game.deck}}</p>
+                        </div>
+                        <div ng-show="model.isAdmin" class="col-xs-1">
+                            <a href="#!/game/{{game._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

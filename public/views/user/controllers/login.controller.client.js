@@ -3,11 +3,14 @@
         .module("GameOn")
         .controller("loginController", loginController);
 
-    function loginController($location, userService) {
+    function loginController($location, userService, sessionUser) {
         var model = this;
         model.login = login;
 
         function init() {
+            if(sessionUser) {
+                $location.url("profile");
+            }
         }
 
         init();

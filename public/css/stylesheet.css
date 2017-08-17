@@ -157,12 +157,13 @@ a:hover {
 
 .delta-navbar-username {
     text-transform: uppercase;
+    font-weight: 600;
     color: #FFFFFF;
     padding: 3px;
     border-radius: 5px;
 }
 
-.delta-navbar-username > a:focus, a:hover {
+.delta-navbar-username:hover, .delta-navbar-username:focus {
     color: #FFFFFF;
     background: #0097a7;
 }
