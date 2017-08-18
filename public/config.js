@@ -28,8 +28,8 @@
                 }
             })
             .when("/default", {
-                templateUrl: "./views/user/templates/login.view.client.html",
-                controller: "loginController",
+                templateUrl: "./views/search/templates/home.view.client.html",
+                controller: "homeController",
                 controllerAs: "model",
                 resolve: {
                     sessionUser: checkLogin
@@ -59,15 +59,15 @@
                     sessionUser: checkLoginStrict
                 }
             })
-            .when("/game/:wid", {
-                templateUrl: "views/game/templates/game-edit.view.client.html",
-                controller: "editGameController",
+            .when("/game/:gameId/manage", {
+                templateUrl: "views/game/templates/game-manage.view.client.html",
+                controller: "gameManageController",
                 controllerAs: "model",
                 resolve: {
                     sessionUser: checkLogin
                 }
             })
-            .when("/game/:wid/detail", {
+            .when("/game/:gameId/detail", {
                 templateUrl: "views/game/templates/game-detail.view.client.html",
                 controller: "gameDetailController",
                 controllerAs: "model",

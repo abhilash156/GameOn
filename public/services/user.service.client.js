@@ -8,6 +8,7 @@
             "findUserByUsername": findUserByUsername,
             "findUserByCredentials": findUserByCredentials,
             "getOwnedGamesByUser": getOwnedGamesByUser,
+            "getInventoryByUser": getInventoryByUser,
             "getLikedGamesByUser": getLikedGamesByUser,
             "checkLogin": checkLogin,
             "logout": logout,
@@ -69,6 +70,12 @@
 
         function getOwnedGamesByUser(userId) {
             var url = "/api/user/" + userId + "/owned";
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function getInventoryByUser(userId) {
+            var url = "/api/user/" + userId + "/inventory";
 
             return $http.get(url).then(successCallback, errorCallback);
         }

@@ -36,10 +36,45 @@ function addGame(userId, gameId) {
         })
 }
 
+function removeGame(userId, gameId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.games.indexOf(gameId);
+            user.games.splice(index, 1);
+            return user.save();
+        });
+}
+
+function addInventory(userId, inventoryId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.inventory.push(inventoryId);
+            return user.save();
+        })
+}
+
+function removeInventory(userId, inventoryId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.inventory.indexOf(inventoryId);
+            user.inventory.splice(index, 1);
+            return user.save();
+        });
+}
+
 function addLike(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
             user.liked.push(gameId);
+            return user.save();
+        })
+}
+
+function removeLike(userId, gameId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var index = user.liked.indexOf(gameId);
+            user.liked.splice(index, 1);
             return user.save();
         })
 }
@@ -72,24 +107,6 @@ function removeFollow(userId, userId2) {
             user.following.splice(index, 1);
             return user.save();
         });
-}
-
-function removeGame(userId, gameId) {
-    return userModel.findById(userId)
-        .then(function (user) {
-            var index = user.games.indexOf(gameId);
-            user.games.splice(index, 1);
-            return user.save();
-        });
-}
-
-function removeLike(userId, gameId) {
-    return userModel.findById(userId)
-        .then(function (user) {
-            var index = user.liked.indexOf(gameId);
-            user.liked.splice(index, 1);
-            return user.save();
-        })
 }
 
 function findUserById(userId) {

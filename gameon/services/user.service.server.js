@@ -25,6 +25,7 @@ app.delete("/api/user/:userId", deleteUser);
 app.get("/api/user/:userId/liked", findLikedGamesByUser);
 app.get("/api/user/:userId/liked/:gameId", isLiked);
 app.get("/api/user/:userId/owned", findOwnedGamesByUser);
+app.get("/api/user/:userId/inventory", getInventoryByUser);
 app.get("/api/user/:userId/owned/:gameId", isOwned);
 app.get("/api/user/:userId/following", getFollowing);
 app.get("/api/user/:userId/following/:userId2", isFollowing);
@@ -55,7 +56,6 @@ if(process.env.GOOGLE_CLIENT_ID) {
     };
 }
 
-
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 function createUser(request, response) {
@@ -68,7 +68,6 @@ function createUser(request, response) {
             response.sendStatus(404).error(error);
         });
 }
-
 
 function googleStrategy(token, refreshToken, profile, done) {
     console.log(profile);
@@ -208,6 +207,18 @@ function findOwnedGamesByUser(request, response) {
         .exec()
         .then(function (user) {
             response.json(user.games);
+        }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function getInventoryByUser(request, response) {
+    var userId = request.params.userId;
+
+    userModel.findUserById(userId).populate("inventory")
+        .exec()
+        .then(function (user) {
+            response.json(user.inventory);
         }, function (error) {
             response.sendStatus(404).error(error);
         });

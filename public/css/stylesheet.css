@@ -185,13 +185,13 @@ a:hover {
     padding: 8px;
 }
 
-.glyphicon-cog {
-    color: inherit;
+.glyphicon-search {
+    color: #006064;
+    padding: 0px;
 }
 
-.glyphicon-search {
-    color: #000000;
-    padding: 0px;
+.glyphicon-cog {
+    color: inherit;
 }
 
 .glyphicon-align-justify {

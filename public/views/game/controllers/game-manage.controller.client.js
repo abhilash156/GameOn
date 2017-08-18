@@ -1,17 +1,17 @@
 (function () {
     angular
         .module("GameOn")
-        .controller("editGameController", editGameController);
+        .controller("gameManageController", gameManageController);
 
-    function editGameController($routeParams, gameService, $location, sessionUser, userService) {
+    function gameManageController($routeParams, gameService, $location, sessionUser, userService) {
         var model = this;
         model.updateGame = updateGame;
         model.deleteGame = deleteGame;
         model.userId = sessionUser._id;
-        model.gameId = $routeParams["wid"];
+        model.gameId = $routeParams["gameId"];
 
         function init() {
-            userService.getOwnedGamesByUser(model.userId)
+            userService.getInventoryByUser(model.userId)
                 .then(function (games) {
                     model.games = games;
                 });

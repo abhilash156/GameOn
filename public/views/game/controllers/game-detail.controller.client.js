@@ -6,15 +6,19 @@
     function gameDetailController($routeParams, gameService, giantBombService, $location, sessionUser) {
         var model = this;
 
-        model.gameId = $routeParams["wid"];
+        model.gameId = $routeParams["gameId"];
         model.liked = false;
         model.owned = false;
+
+        model.loggedUser = sessionUser;
+        model.isAnon = true;
+        model.isSelling = false;
+
         model.getGameURL = getGameURL;
         model.likeGame = likeGame;
         model.unLikeGame = unLikeGame;
         model.buyGame = buyGame;
-        model.loggedUser = sessionUser;
-        model.isAnon = true;
+        model.sellGame = sellGame;
 
         function init() {
             if (sessionUser) {
@@ -73,6 +77,10 @@
                         model.owned = true;
                     });
             }
+        }
+
+        function sellGame() {
+            $location.url("/game/" + model.gameId + "/manage");
         }
 
         function unLikeGame() {

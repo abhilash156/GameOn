@@ -1,4 +1,4 @@
-<div>
+<div class="delta-content">
     <div class="delta-navbar-top">
         <ng-include src="'views/common/templates/navbar-top.view.client.html'">
     </div>
@@ -17,25 +17,33 @@
                                 <div class="delta-object-sub-title">{{ model.gameInfo.developers[0].name }}</div>
                             </div>
                             <div class="delta-object-buttons">
-                                <div ng-switch="model.liked">
+                                <div ng-hide="model.loggedUser.isAdmin" ng-switch="model.liked">
                                     <div ng-switch-when=false>
                                         <a role="button" class="btn btn-success btn-sm"
-                                           ng-click="model.likeGame()">Follow</a>
+                                           ng-click="model.likeGame()">Like</a>
                                     </div>
                                     <div ng-switch-when=true>
                                         <a role="button" class="btn btn-danger btn-sm"
-                                           ng-click="model.unLikeGame()">Unfollow</a>
+                                           ng-click="model.unLikeGame()">Dislike</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="delta-object-buttons">
-                                <div ng-switch="model.owned">
-                                    <div ng-switch-when=false>
-                                        <a role="button" class="btn btn-success btn-sm"
-                                           ng-click="model.buyGame()">Buy Game</a>
+                                <div ng-hide="model.loggedUser.isAdmin || model.loggedUser.isSeller">
+                                    <div ng-switch="model.owned">
+                                        <div ng-switch-when=false>
+                                            <a role="button" class="btn btn-primary btn-sm"
+                                               ng-click="model.buyGame()">Buy Game</a>
+                                        </div>
+                                        <div ng-switch-when=true>
+                                            <h5 class="delta-object-text"><i>You own this game!</i></h5>
+                                        </div>
                                     </div>
-                                    <div ng-switch-when=true>
-                                        <h5 class="delta-object-text"><i>You own this game!</i></h5>
+                                </div>
+                                <div ng-show="model.loggedUser.isSeller">
+                                    <div>
+                                        <a role="button" class="btn btn-primary btn-sm"
+                                           ng-click="model.sellGame()">Game Inventory</a>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +53,7 @@
                                         <a href="#"><i class="glyphicon glyphicon-home"></i>
                                             Overview </a>
                                     </li>
-                                    <li>
+                                    <li ng-hide=true>
                                         <a href="#"><i class="fa fa-gamepad"></i>Gameplay </a>
                                     </li>
                                 </ul>

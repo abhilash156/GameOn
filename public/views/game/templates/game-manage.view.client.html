@@ -1,0 +1,42 @@
+<div class="delta-content">
+    <div class="delta-navbar-top">
+        <ng-include src="'views/common/templates/navbar-top.view.client.html'">
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="visible-lg col-lg-3 delta-split-view-left">
+                <ul class="list-group">
+                    <li ng-repeat="game in model.games" class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <a href="#!/game/{{game._id}}/detail"><b>{{game.name}}</b></a>
+                            </div>
+                            <div class="col-xs-2">
+                                <a href="#!/game/{{game._id}}"><span
+                                        class="glyphicon glyphicon-cog pull-right"></span></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-lg-9 delta-split-view-right">
+                <label for="name">Name</label>
+                <input name="Name" ng-model="model.game.name" class="form-control" id="name" readonly/>
+
+                <label for="externalId">ExternalID</label>
+                <input name="ExternalId" ng-model="model.game.externalId" class="form-control" id="externalId" readonly/>
+
+                <label for="quantity">Quantity</label>
+                <input name="Quantity" ng-model="model.game.quantity" class="form-control" id="quantity"/>
+
+                <label for="price">Price</label>
+                <input name="Price" ng-model="model.game.price" class="form-control" id="price"/>
+
+                <a class="btn btn-default btn-primary btn-block" ng-click="model.updateListing(model.game)">Update</a>
+
+                <a class="btn btn-default btn-danger btn-block" ng-click="model.deleteListing()">Remove</a>
+            </div>
+        </div>
+    </div>
+</div>
