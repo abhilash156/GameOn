@@ -3,7 +3,6 @@ var gameSchema = require("./game.schema.server");
 mongoose.Promise = require("q").Promise;
 
 var gameModel = mongoose.model("GameModel", gameSchema);
-var userModel = require("../user/user.model.server");
 
 require("../models.server");
 
@@ -75,11 +74,5 @@ function updateGame(gameId, game) {
 }
 
 function deleteGame(gameId) {
-    return gameModel.findById(gameId)
-        .then(function (game) {
-            return gameModel.remove({_id: gameId})
-                .then(function () {
-                    return userModel.removeGame(game._user, gameId);
-                });
-        });
+   return gameModel.remove({_id: gameId});
 }

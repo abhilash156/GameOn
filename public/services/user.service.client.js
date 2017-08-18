@@ -19,7 +19,8 @@
             "getFollowers": getFollowers,
             "isFollowing": isFollowing,
             "isFollower": isFollower,
-            "getUsers": getUsers
+            "getUsers": getUsers,
+            "searchUsers": searchUsers
         };
         return api;
 
@@ -43,6 +44,12 @@
 
         function findUserByUsername(username) {
             var url = "/api/user?username=" + username;
+
+            return $http.get(url).then(successCallback, errorCallback);
+        }
+
+        function searchUsers(searchTerm) {
+            var url = "/api/searchUsers?searchTerm=" + searchTerm;
 
             return $http.get(url).then(successCallback, errorCallback);
         }

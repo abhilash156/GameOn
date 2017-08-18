@@ -4,19 +4,46 @@
     </div>
     <div class="container">
         <div class="delta-object-content">
-            <ul ng-repeat="game in model.searchResult" class="list-group">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <img class="delta-list-image" ng-src="{{game.image.small_url}}" width="60" height="80">
+            <div>
+                <h4>Showing Results for Games: </h4>
+                <ul ng-show="model.searchResult" ng-repeat="game in model.searchResult" class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img class="delta-list-image" ng-src="{{game.image.small_url}}" width="60" height="80">
+                            </div>
+                            <div class="col-xs-8">
+                                <a ng-click="model.getGameURL(game.id)" role="button"><h4>{{game.name}}</h4></a>
+                                <p>{{game.deck}}</p>
+                            </div>
                         </div>
-                        <div class="col-xs-8">
-                            <a ng-click="model.getGameURL(game.id)" role="button"><h4>{{game.name}}</h4></a>
-                            <p>{{game.deck}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="model.loggedUser">
+                <div ng-hide="model.searchResult">
+                    No Games Matched the Search Query
+                </div>
+                <h4>Showing Results for Users: </h4>
+                <ul ng-show="model.searchResultUsers"
+                    ng-repeat="user in model.searchResultUsers" class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img class="delta-list-image" ng-src="{{user.cover}}" width="80" height="80">
+                            </div>
+                            <div class="col-xs-8">
+                                <a href="#!/profile/{{user.username}}" role="button">
+                                    <h4>{{user.firstName}} {{user.lastName}}</h4></a>
+                                <p>{{user.username}}</p>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+                <div ng-hide="model.searchResultUsers">
+                    No Users Matched the Search Query
+                </div>
+            </div>
         </div>
     </div>
 </div>

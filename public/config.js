@@ -85,7 +85,7 @@
                     deferred.reject();
                     $location.url("/login");
                 } else {
-                    deferred.resolve(user);
+                    deferred.resolve(setUserType(user));
                 }
             });
         return deferred.promise;
@@ -98,10 +98,21 @@
                 if (user === '0') {
                     deferred.resolve(null);
                 } else {
-                    deferred.resolve(user);
+                    deferred.resolve(setUserType(user));
                 }
             });
         return deferred.promise;
     }
 
+
+    function setUserType(user) {
+        if(user.userType === 'ADMIN') {
+            user.isAdmin = true;
+        } else if(user.userType === 'SELLER') {
+            user.isSeller = true;
+        } else {
+            user.isPlayer = true;
+        }
+        return user;
+    }
 })();

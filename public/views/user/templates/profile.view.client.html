@@ -37,23 +37,23 @@
                                         <a ng-click="model.setContentType('PROFILE')" role="button">
                                             <i class="fa fa-home"></i>Profile</a>
                                     </li>
-                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('GAMES')}">
+                                    <li ng-show="!model.loggedUser.isAdmin" ng-class="{active : model.isActive('GAMES')}">
                                         <a ng-click="model.setContentType('GAMES')" role="button">
                                             <i class="fa fa-gamepad"></i>Games</a>
                                     </li>
-                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('LIKED')}">
+                                    <li ng-show="!model.loggedUser.isAdmin" ng-class="{active : model.isActive('LIKED')}">
                                         <a ng-click="model.setContentType('LIKED')" role="button">
                                             <i class="fa fa-bookmark"></i>Liked</a>
                                     </li>
-                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('FOLLOWING')}">
+                                    <li ng-show="!model.loggedUser.isAdmin" ng-class="{active : model.isActive('FOLLOWING')}">
                                         <a ng-click="model.setContentType('FOLLOWING')" role="button">
                                             <i class="fa fa-users"></i>Following</a>
                                     </li>
-                                    <li ng-show="!model.isAdmin" ng-class="{active : model.isActive('FOLLOWERS')}">
+                                    <li ng-show="!model.loggedUser.isAdmin" ng-class="{active : model.isActive('FOLLOWERS')}">
                                         <a ng-click="model.setContentType('FOLLOWERS')" role="button">
                                             <i class="fa fa-users"></i>Followers</a>
                                     </li>
-                                    <li ng-show="model.isAdmin" ng-class="{active : model.isActive('USERS')}">
+                                    <li ng-show="model.loggedUser.isAdmin" ng-class="{active : model.isActive('USERS')}">
                                         <a ng-click="model.setContentType('USERS')" role="button">
                                             <i class="fa fa-users"></i>Users</a>
                                     </li>

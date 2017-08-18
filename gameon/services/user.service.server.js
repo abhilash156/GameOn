@@ -12,6 +12,7 @@ var bcrypt = require("bcrypt-nodejs");
 
 app.post("/api/user", createUser);
 app.get("/api/user", findUserByUsername);
+app.get("/api/searchUsers", searchUsers);
 app.get("/api/users", getAllUsers);
 app.get("/auth/google", passport.authenticate('google', {scope: ['profile', 'email']}));
 app.post("/api/login", passport.authenticate('local'), login);
@@ -377,6 +378,18 @@ function getAllUsers(request, response) {
         .then(function (users) {
             response.send(users);
         }, function (error) {
+            response.sendStatus(404).error(error);
+        });
+}
+
+function searchUsers(request, response) {
+    var searchTerm = request.query.searchTerm;
+    userModel.searchUsers(searchTerm)
+        .then(function (users) {
+            response.send(users);
+        }, function (error) {
+            console.log(error);
+
             response.sendStatus(404).error(error);
         });
 }

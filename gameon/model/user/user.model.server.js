@@ -20,6 +20,7 @@ userModel.addFollow = addFollow;
 userModel.removeFollow = removeFollow;
 userModel.getAllUsers = getAllUsers;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.searchUsers = searchUsers;
 
 module.exports = userModel;
 
@@ -126,4 +127,14 @@ function deleteUser(userId) {
 function getAllUsers() {
 
     return userModel.find();
+}
+
+function searchUsers(searchTerm) {
+    searchTerm = new RegExp(["^", searchTerm, "$"].join(""), "i");
+    var searchArray = [
+        {"username": searchTerm},
+        {"firstName": searchTerm},
+        {"lastName": searchTerm},
+        {"email": searchTerm}];
+    return userModel.find().or(searchArray);
 }

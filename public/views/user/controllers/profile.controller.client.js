@@ -17,7 +17,6 @@
         model.followers = null;
         model.following = null;
         model.isLoggedUser = false;
-        model.isAdmin = false;
 
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
@@ -33,9 +32,6 @@
                 model.userId = sessionUser._id;
                 model.user = sessionUser;
                 model.isLoggedUser = true;
-                if(model.user.userType === 'ADMIN') {
-                    model.isAdmin = true;
-                }
             } else {
                 userService.findUserByUsername(model.username)
                     .then(function (user) {
