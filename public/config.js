@@ -59,36 +59,12 @@
                     sessionUser: checkLoginStrict
                 }
             })
-            .when("/followed", {
-                templateUrl: "views/game/templates/user-followed.view.client.html",
-                controller: "userFollowedController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLoginStrict
-                }
-            })
-            .when("/followers", {
-                templateUrl: "views/game/templates/user-followers.view.client.html",
-                controller: "userFollowersController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLoginStrict
-                }
-            })
-            .when("/game/new", {
-                templateUrl: "views/game/templates/game-new.view.client.html",
-                controller: "newGameController",
-                controllerAs: "model",
-                resolve: {
-                    sessionUser: checkLoginStrict
-                }
-            })
             .when("/game/:wid", {
                 templateUrl: "views/game/templates/game-edit.view.client.html",
                 controller: "editGameController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLoginStrict
+                    sessionUser: checkLogin
                 }
             })
             .when("/game/:wid/detail", {
@@ -96,7 +72,7 @@
                 controller: "gameDetailController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLoginStrict
+                    sessionUser: checkLogin
                 }
             });
     }

@@ -1,21 +1,7 @@
 <div class="delta-content">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-xs-2 pull-left delta-margin-top">
-                    <p class="accent-text pull-left"><b>GameOn</b></p>
-                </div>
-                <div class="col-lg-4 col-xs-4 pull-right">
-                    <div class="delta-navbar-user">
-                        <a class="delta-navbar-username pull-right" href="#!/profile">
-                            <img ng-src="{{model.loggedUser.cover}}" class="delta-navbar-userpic">
-                            {{model.loggedUser.username}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="delta-navbar-top">
+        <ng-include src="'views/common/templates/navbar-top-anon.view.client.html'">
+    </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-1 col-md-2"></div>

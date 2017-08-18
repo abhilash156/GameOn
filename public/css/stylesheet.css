@@ -148,7 +148,7 @@ a:hover {
 }
 
 .delta-navbar-userpic {
-    border-radius : 5px;
+    border-radius: 5px;
     width: 30px;
     height: 30px;
     /*padding-left: 10px;
@@ -163,11 +163,19 @@ a:hover {
     border-radius: 5px;
 }
 
+.delta-navbar-logo {
+    font-weight: 600;
+    color: #FFFFFF;
+    padding: 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
 .delta-inline-block {
     display: inline;
 }
 
-.delta-navbar-username:hover, .delta-navbar-username:focus {
+.delta-navbar-username:hover, .delta-navbar-username:focus, .delta-navbar-logo:hover, .delta-navbar-logo:focus {
     color: #FFFFFF;
     background: #0097a7;
 }

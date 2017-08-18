@@ -20,7 +20,6 @@
         function searchGames() {
             giantBombService.searchGames(model.searchTerm)
                 .then(function (response) {
-                    console.log(response);
                     model.searchResult = response.results;
                 });
         }
@@ -28,6 +27,7 @@
         function getGameURL(externalId) {
             gameService.findGameByExternalId(externalId)
                 .then(function (game) {
+                    console.log(game);
                     $location.url("/game/" + game._id + "/detail");
                 });
         }
