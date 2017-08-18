@@ -5,12 +5,12 @@
     function configurations($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "../views/detail.client.html",
+                templateUrl: "./detail.client.html",
                 controller: "detailController",
                 controllerAs: "model"
             })
             .when("/home", {
-                templateUrl: "../views/detail.client.html",
+                templateUrl: "./detail.client.html",
                 controller: "detailController",
                 controllerAs: "model"
             })
