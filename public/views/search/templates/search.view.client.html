@@ -19,11 +19,11 @@
                         </div>
                     </li>
                 </ul>
+                <div ng-hide="model.searchResult">
+                    <i>No Users Games the search query</i>
+                </div>
             </div>
             <div ng-show="model.loggedUser">
-                <div ng-hide="model.searchResult">
-                    No Games Matched the Search Query
-                </div>
                 <h4>Showing Results for Users: </h4>
                 <ul ng-show="model.searchResultUsers"
                     ng-repeat="user in model.searchResultUsers" class="list-group">
@@ -40,8 +40,8 @@
                         </div>
                     </li>
                 </ul>
-                <div ng-hide="model.searchResultUsers">
-                    No Users Matched the Search Query
+                <div ng-hide="model.searchResultUsers.length > 0">
+
                 </div>
             </div>
         </div>

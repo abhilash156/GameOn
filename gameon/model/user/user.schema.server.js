@@ -16,6 +16,11 @@ var userSchema = mongoose.Schema({
         id: String,
         token: String
     },
+    inventory: [{
+        id: {type: mongoose.Schema.Types.ObjectId, ref: "GameModel"},
+        quantity: String,
+        cost: String
+    }],
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 

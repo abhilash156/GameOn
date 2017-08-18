@@ -62,6 +62,7 @@
         function findGameByExternalId(externalId) {
             var url = "/api/game?externalId=" + externalId;
 
+
             return $http.get(url).then(function (response) {
                 if (response.status === 204) {
                     return giantBombService.getGameById(externalId)
@@ -69,7 +70,7 @@
                             return createGame(giantBombService.getGameObject(gameData.results))
                         })
                 } else {
-                    successCallback(response);
+                    return successCallback(response);
                 }
             }, errorCallback);
         }

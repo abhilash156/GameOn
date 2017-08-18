@@ -31,7 +31,6 @@
         function getGameURL(externalId) {
             gameService.findGameByExternalId(externalId)
                 .then(function (game) {
-                    console.log(game);
                     $location.url("/game/" + game._id + "/detail");
                 });
         }
