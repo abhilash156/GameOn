@@ -32,7 +32,7 @@
                             </div>
                             <div class="delta-object-menu">
                                 <ul class="nav">
-                                    <li ng-show="model.isLoggedUser || model.isAdmin"
+                                    <li ng-show="model.isLoggedUser || (model.loggedUser.isAdmin)"
                                         ng-class="{active : model.isActive('PROFILE')}">
                                         <a ng-click="model.setContentType('PROFILE')" role="button">
                                             <i class="fa fa-home"></i>Profile</a>

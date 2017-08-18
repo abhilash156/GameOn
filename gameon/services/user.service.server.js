@@ -46,11 +46,14 @@ var googleConfig = {
     callbackURL: 'http://127.0.0.1:3030/google/callback'
 };
 
-/*var googleConfig = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
-};*/
+if(process.env.GOOGLE_CLIENT_ID) {
+    googleConfig = {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL
+    };
+}
+
 
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
