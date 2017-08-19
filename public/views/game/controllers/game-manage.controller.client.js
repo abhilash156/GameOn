@@ -28,6 +28,7 @@
                         gameService.findGameById(model.gameId)
                             .then(function (game) {
                                 model.game = game;
+                                model.inventory = {};
                                 model.inventory._game = model.gameId;
                                 model.inventory.name = game.name;
                                 model.inventory.price = 0;

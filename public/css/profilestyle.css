@@ -29,6 +29,14 @@
     margin-bottom: 7px;
 }
 
+.delta-object-title-head {
+    color: #00838f;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 7px;
+    text-align: center;
+}
+
 .delta-object-sub-title {
     text-transform: uppercase;
     color: #5a7391;

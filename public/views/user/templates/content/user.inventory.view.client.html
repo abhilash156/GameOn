@@ -1,0 +1,18 @@
+<ul class="list-group">
+    <div class="delta-object-title-head">Game Inventory</div>
+    <li ng-repeat="game in model.viewGames" class="list-group-item">
+        <div class="row">
+            <div class="col-xs-3">
+                <img class="delta-list-image" ng-src="{{game._game.cover}}" width="120" height="160">
+            </div>
+            <div class="col-xs-8">
+                <a href="#!/game/{{game._game._id}}/detail"><h4>{{game._game.name}}</h4></a>
+                <p>{{game._game.description}}</p>
+            </div>
+            <div class="col-xs-1">
+                <a href="#!/game/{{game._game._id}}/manage" ng-show="model.loggedUser.isSeller">
+                    <span class="glyphicon glyphicon-cog pull-right"></span></a>
+            </div>
+        </div>
+    </li>
+</ul>

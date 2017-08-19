@@ -16,6 +16,7 @@
         model.likedGames = null;
         model.followers = null;
         model.following = null;
+        model.inventory = null;
         model.isLoggedUser = false;
 
         model.updateUser = updateUser;
@@ -86,6 +87,14 @@
                 });
         }
 
+        function loadInventory() {
+            userService.getInventoryByUser(model.userId)
+                .then(function (users) {
+                    model.inventory = users;
+                    model.viewGames = model.inventory;
+                });
+        }
+
         function updateUser(user) {
             userService.updateUser(model.userId, user)
                 .then(function () {
@@ -141,6 +150,13 @@
                     break;
                 case 'USERS':
                     loadAllUsers();
+                    break;
+                case 'INVENTORY':
+                    if (model.inventory === null) {
+                        loadInventory();
+                    } else {
+                        model.viewGames = model.inventory;
+                    }
                     break;
             }
         }
