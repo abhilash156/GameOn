@@ -2,10 +2,10 @@
     <div class="delta-object-title-head">Users</div>
     <li ng-repeat="viewUser in model.viewUsers" class="list-group-item">
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-5 col-sm-3">
                 <img class="delta-list-image" ng-src="{{viewUser.cover}}" width="80" height="80">
             </div>
-            <div class="col-xs-8">
+            <div class="col-xs-7 col-sm-9">
                 <a href="#!/profile/{{viewUser.username}}">
                     <div class="delta-object-title-name">{{viewUser.firstName}} {{viewUser.lastName}}</div>
                 </a>
