@@ -4,7 +4,7 @@ var userModel = require("../model/user/user.model.server");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-passport.use(new LocalStrategy(localStrategy));
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -15,6 +15,7 @@ app.get("/api/user", findUserByUsername);
 app.get("/api/searchUsers", searchUsers);
 app.get("/api/users", getAllUsers);
 app.get("/auth/google", passport.authenticate('google', {scope: ['profile', 'email']}));
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 app.post("/api/login", passport.authenticate('local'), login);
 app.get("/api/logout", logout);
 app.get("/api/checkLogin", checkLogin);
@@ -46,11 +47,22 @@ app.get('/google/callback', passport.authenticate('google', {
     successRedirect: '/#!/profile',
     failureRedirect: '/#!/login'
 }));
+app.get('/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/#/user',
+    failureRedirect: '/#/login'
+}));
 
 var googleConfig = {
     clientID: '374736085891-gbc0opl6pfl4llknf6ce5p1gjcmggod7.apps.googleusercontent.com',
     clientSecret: 'c3ibpRcGD2zKlpXWKYRDdgf2',
     callbackURL: 'http://127.0.0.1:3030/google/callback'
+};
+
+var facebookConfig = {
+    clientID: '895947820560957',
+    clientSecret: 'dee6a2e891852a75a9bc5027cd695710',
+    callbackURL: 'http://127.0.0.1:3030/facebook/callback',
+    profileFields: ['id', 'displayName', 'email', 'name', 'picture.type(large)']
 };
 
 if (process.env.GOOGLE_CLIENT_ID) {
@@ -61,7 +73,18 @@ if (process.env.GOOGLE_CLIENT_ID) {
     };
 }
 
+if (process.env.FACEBOOK_CLIENT_ID) {
+    facebookConfig = {
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+        profileFields: ['id', 'displayName', 'email', 'name', 'picture.type(large)']
+    };
+}
+
+passport.use(new LocalStrategy(localStrategy));
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 function createUser(request, response) {
     var user = request.body;
@@ -75,7 +98,6 @@ function createUser(request, response) {
 }
 
 function googleStrategy(token, refreshToken, profile, done) {
-    console.log(profile);
     userModel
         .findUserByGoogleId(profile.id)
         .then(
@@ -115,6 +137,45 @@ function googleStrategy(token, refreshToken, profile, done) {
                 }
             }
         );
+}
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    console.log(profile);
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(function (user) {
+                if (user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        email: email,
+                        username: emailParts[0],
+                        cover: profile.photos[0].value,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        facebook: {
+                            id: profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            })
+        .then(function (user) {
+                return done(null, user);
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            });
 }
 
 function serializeUser(user, done) {

@@ -21,11 +21,14 @@
                    class="form-control"
                    placeholder="Password"
                    required>
-            <a class="btn btn-primary btn-block" ng-click="model.login(model.user)" type="submit">Login</a>
+            <a class="btn btn-success btn-block" ng-click="model.login(model.user)" type="submit">Login</a>
 
             <a href="/auth/google" class="btn btn-danger btn-block"><span class="fa fa-google"></span>oogle</a>
 
-            <a class="btn btn-success btn-block" type="submit" href="#!/register">Register</a>
+            <a href="/auth/facebook" class="btn btn-primary btn-block"><span class="fa fa-facebook"></span>acebook</a>
+            <br>
+            <p>Not a registered user? <a href="#!/register">Create</a> an account</p>
+
         </div>
         <div class="visible-lg visible-md col-lg-2 col-md-1"></div>
     </div>

@@ -20,6 +20,7 @@ userModel.addFollow = addFollow;
 userModel.removeFollow = removeFollow;
 userModel.getAllUsers = getAllUsers;
 userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.searchUsers = searchUsers;
 userModel.removeInventory = removeInventory;
 userModel.upsertInventory = upsertInventory;
@@ -138,6 +139,11 @@ function findUserById(userId) {
 function findUserByGoogleId(googleId) {
 
     return userModel.findOne({'google.id': googleId});
+}
+
+function findUserByFacebookId(facebookId) {
+
+    return userModel.findOne({'facebook.id': facebookId});
 }
 
 function findUserByUsername(username) {
