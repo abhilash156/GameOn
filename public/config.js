@@ -64,7 +64,7 @@
                 controller: "gameManageController",
                 controllerAs: "model",
                 resolve: {
-                    sessionUser: checkLogin
+                    sessionUser: checkLoginStrict
                 }
             })
             .when("/game/:gameId/detail", {
@@ -73,6 +73,14 @@
                 controllerAs: "model",
                 resolve: {
                     sessionUser: checkLogin
+                }
+            })
+            .when("/admin/create", {
+                templateUrl: "views/user/templates/register.view.client.html",
+                controller: "registerController",
+                controllerAs: "model",
+                resolve: {
+                    sessionUser: checkLoginStrict
                 }
             });
     }
@@ -106,9 +114,9 @@
 
 
     function setUserType(user) {
-        if(user.userType === 'ADMIN') {
+        if (user.userType === 'ADMIN') {
             user.isAdmin = true;
-        } else if(user.userType === 'SELLER') {
+        } else if (user.userType === 'SELLER') {
             user.isSeller = true;
         } else {
             user.isPlayer = true;

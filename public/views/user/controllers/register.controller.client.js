@@ -7,9 +7,11 @@
         var model = this;
 
         model.registerUser = registerUser;
+        model.createUser = createUser;
+        model.loggedUser = sessionUser;
 
         function init() {
-            if (sessionUser) {
+            if (sessionUser && !sessionUser.isAdmin) {
                 $location.url("profile");
             }
         }
@@ -29,6 +31,25 @@
                                         }
                                     );
 
+                                });
+                        } else {
+                            model.errorMessage = "User already exists";
+                        }
+                    });
+
+            } else {
+                model.errorMessage = "Password don't match";
+            }
+        }
+
+        function createUser(user, password) {
+            if (password === user.password) {
+                userService.findUserByUsername(user.username)
+                    .then(function (existUser) {
+                        if (!existUser) {
+                            userService.createUser(user)
+                                .then(function (user) {
+                                    $location.url("profile");
                                 });
                         } else {
                             model.errorMessage = "User already exists";

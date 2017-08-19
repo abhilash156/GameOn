@@ -8,7 +8,8 @@
             <div ng-show="model.errorMessage" class="alert alert-danger">
                 {{ model.errorMessage }}
             </div>
-            <h2 class="heading">Register</h2>
+            <h2 ng-hide="model.loggedUser.isAdmin" class="heading">Register</h2>
+            <h2 ng-show="model.loggedUser.isAdmin" class="heading">Create User</h2>
             <input class="form-control" ng-model="model.user.username" placeholder="Username"/>
             <input class="form-control" ng-model="model.user.firstName" placeholder="First Name"/>
             <input class="form-control" ng-model="model.user.lastName" placeholder="Last Name"/>
@@ -18,7 +19,10 @@
             </select>
             <input type="password" ng-model="model.user.password" class="form-control" placeholder="Password"/>
             <input type="password" ng-model="model.vPassword" class="form-control" placeholder="Verify Password"/>
-            <a class="btn btn-primary btn-block" ng-click="model.registerUser(model.user, model.vPassword)">Register</a>
+            <a ng-hide="model.loggedUser.isAdmin" class="btn btn-primary btn-block"
+               ng-click="model.registerUser(model.user, model.vPassword)">Register</a>
+            <a ng-show="model.loggedUser.isAdmin" class="btn btn-primary btn-block"
+               ng-click="model.createUser(model.user, model.vPassword)">Create</a>
             <a class="btn btn-danger  btn-block" href="#!/login">Cancel</a>
         </div>
         <div class="visible-lg visible-md col-lg-2 col-md-1"></div>

@@ -1,16 +1,23 @@
-<div class="delta-object-title-head">Users</div>
-<ul class="list-group">
-    <li ng-repeat="viewUser in model.viewUsers" class="list-group-item">
-        <div class="row">
-            <div class="col-xs-5 col-sm-3">
-                <img class="delta-list-image" ng-src="{{viewUser.cover}}" width="80" height="80">
+<div class="delta-object-title-head">Users
+    <a ng-show="model.loggedUser.isAdmin" href="#!/admin/create" class="btn btn-success btn-sm pull-right" type="button">
+        <span class="fa fa-plus"></span>
+        <h5 class="delta-inline-block hidden-xs">Create User</h5>
+    </a>
+</div>
+<div>
+    <ul class="list-group">
+        <li ng-repeat="viewUser in model.viewUsers" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-5 col-sm-3">
+                    <img class="delta-list-image" ng-src="{{viewUser.cover}}" width="80" height="80">
+                </div>
+                <div class="col-xs-7 col-sm-9">
+                    <a href="#!/profile/{{viewUser.username}}">
+                        <div class="delta-object-title-name">{{viewUser.firstName}} {{viewUser.lastName}}</div>
+                    </a>
+                    <div class="delta-object-sub-title">{{viewUser.username}}</div>
+                </div>
             </div>
-            <div class="col-xs-7 col-sm-9">
-                <a href="#!/profile/{{viewUser.username}}">
-                    <div class="delta-object-title-name">{{viewUser.firstName}} {{viewUser.lastName}}</div>
-                </a>
-                <div class="delta-object-sub-title">{{viewUser.username}}</div>
-            </div>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
+</div>
