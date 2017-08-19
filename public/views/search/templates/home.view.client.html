@@ -3,6 +3,7 @@
         <ng-include src="'views/common/templates/navbar-top-anon.view.client.html'">
     </div>
     <div class="container-fluid">
+        <p class="delta-home-margin-top"></p>
         <div class="row">
             <div class="col-xs-1 col-md-2"></div>
             <div class="col-xs-10 col-lg-8 col-md-8">
@@ -10,7 +11,7 @@
                      class="img-responsive delta-list-image" alt="" width="30%">
                 <div class="input-group">
                     <input ng-keyup="$event.keyCode == 13 && model.search(searchText)" ng-model="searchText"
-                           type="text" class="form-control">
+                           type="text" class="form-control"  placeholder="Search">
                     <span class="input-group-btn">
                         <a href="#!/search?q={{searchText}}" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search"></span></a>

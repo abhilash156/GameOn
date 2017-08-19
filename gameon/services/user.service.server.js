@@ -140,7 +140,6 @@ function googleStrategy(token, refreshToken, profile, done) {
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    console.log(profile);
     userModel
         .findUserByFacebookId(profile.id)
         .then(function (user) {
@@ -465,8 +464,6 @@ function searchUsers(request, response) {
         .then(function (users) {
             response.send(users);
         }, function (error) {
-            console.log(error);
-
             response.sendStatus(404).error(error);
         });
 }
@@ -479,7 +476,6 @@ function removeInventory(request, response) {
         .then(function () {
             response.sendStatus(200);
         }, function (error) {
-            console.log(error);
             response.sendStatus(404).error(error);
         });
 }
@@ -487,13 +483,11 @@ function removeInventory(request, response) {
 function upsertInventory(request, response) {
     var userId = request.params.userId;
     var inventory = request.body;
-    console.log(inventory);
 
     userModel.upsertInventory(userId, inventory)
         .then(function (users) {
             response.send(users);
         }, function (error) {
-            console.log(error);
             response.sendStatus(404).error(error);
         });
 }

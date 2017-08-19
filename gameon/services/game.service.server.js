@@ -61,7 +61,6 @@ function findGameByExternalId(request, response) {
             if (game === null) {
                 response.sendStatus(204);
             } else {
-                console.log(game);
                 response.json(game);
             }
         }, function (error) {

@@ -138,6 +138,10 @@ a:hover {
     margin-top: 12px;
 }
 
+.delta-home-margin-top {
+    margin-top: 60px;
+}
+
 .delta-navbar-icon {
     color: #FFFFFF;
     padding-top: 5px;
@@ -168,7 +172,7 @@ a:hover {
     color: #FFFFFF;
     padding: 3px;
     border-radius: 5px;
-    margin-left: 10px;
+    margin-left: 6px;
 }
 
 .delta-inline-block {

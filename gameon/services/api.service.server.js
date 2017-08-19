@@ -7,7 +7,6 @@ app.post("/api/redirectIG", redirectIG);
 
 function redirectIG(request, response) {
     var body = request.body;
-    console.log(body);
     if (body.requestType === "GET") {
         var url = body.requestURL;
 
