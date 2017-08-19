@@ -21,7 +21,6 @@ userModel.removeFollow = removeFollow;
 userModel.getAllUsers = getAllUsers;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.searchUsers = searchUsers;
-//userModel.addInventory = addInventory;
 userModel.removeInventory = removeInventory;
 userModel.upsertInventory = upsertInventory;
 
@@ -47,14 +46,6 @@ function removeGame(userId, gameId) {
             return user.save();
         });
 }
-
-/*function addInventory(userId, inventory) {
-    return userModel.findById(userId)
-        .then(function (user) {
-            user.inventory.push(inventory);
-            return user.save();
-        })
-}*/
 
 function removeInventory(userId, gameId) {
     return userModel.findById(userId)

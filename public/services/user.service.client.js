@@ -6,10 +6,10 @@
             "createUser": createUser,
             "findUserById": findUserById,
             "findUserByUsername": findUserByUsername,
-            "findUserByCredentials": findUserByCredentials,
             "getOwnedGamesByUser": getOwnedGamesByUser,
             "getInventoryByUser": getInventoryByUser,
             "getLikedGamesByUser": getLikedGamesByUser,
+            "login": login,
             "checkLogin": checkLogin,
             "logout": logout,
             "updateUser": updateUser,
@@ -67,7 +67,7 @@
             return $http.get(url).then(successCallback, errorCallback);
         }
 
-        function findUserByCredentials(username, password) {
+        function login(username, password) {
             var url = "/api/login";
 
             return $http.post(url, {username: username, password: password})

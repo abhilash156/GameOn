@@ -9,7 +9,7 @@
         model.registerUser = registerUser;
 
         function init() {
-            if(sessionUser) {
+            if (sessionUser) {
                 $location.url("profile");
             }
         }
@@ -22,8 +22,13 @@
                     .then(function (existUser) {
                         if (!existUser) {
                             userService.createUser(user)
-                                .then(function () {
-                                    $location.url("profile");
+                                .then(function (user) {
+                                    userService.login(user.username, password).then(
+                                        function () {
+                                            $location.url("profile");
+                                        }
+                                    );
+
                                 });
                         } else {
                             model.errorMessage = "User already exists";
