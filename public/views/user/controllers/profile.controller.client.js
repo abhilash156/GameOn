@@ -36,7 +36,11 @@
             } else {
                 userService.findUserByUsername(model.username)
                     .then(function (user) {
-                        model.contentType = 'GAMES';
+                        if (model.loggedUser.isAdmin) {
+                            model.contentType = 'PROFILE';
+                        } else {
+                            model.contentType = 'GAMES';
+                        }
                         model.isLoggedUser = false;
                         model.userId = user._id;
                         model.user = user;

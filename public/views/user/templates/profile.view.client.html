@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="delta-object-sub-title">{{ model.user.username }}</div>
                             </div>
-                            <div ng-show="!model.isLoggedUser" class="delta-object-buttons">
+                            <div ng-hide="model.isLoggedUser || model.loggedUser.isAdmin" class="delta-object-buttons">
                                 <div ng-switch="model.followed">
                                     <div ng-switch-when=false>
                                         <a role="button" class="btn btn-success btn-sm"
@@ -62,7 +62,7 @@
                                         <a ng-click="model.setContentType('FOLLOWERS')" role="button">
                                             <i class="fa fa-users"></i>Followers</a>
                                     </li>
-                                    <li ng-show="model.loggedUser.isAdmin"
+                                    <li ng-show="model.loggedUser.isAdmin && model.isLoggedUser"
                                         ng-class="{active : model.isActive('USERS')}">
                                         <a ng-click="model.setContentType('USERS')" role="button">
                                             <i class="fa fa-users"></i>Users</a>

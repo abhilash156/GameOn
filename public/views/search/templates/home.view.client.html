@@ -9,7 +9,8 @@
                 <img src="https://raw.githubusercontent.com/abhilash156/GameOn/master/public/images/GameOn.png"
                      class="img-responsive delta-list-image" alt="" width="30%">
                 <div class="input-group">
-                    <input ng-model="searchText" type="text" class="form-control">
+                    <input ng-keyup="$event.keyCode == 13 && model.search(searchText)" ng-model="searchText"
+                           type="text" class="form-control">
                     <span class="input-group-btn">
                         <a href="#!/search?q={{searchText}}" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search"></span></a>

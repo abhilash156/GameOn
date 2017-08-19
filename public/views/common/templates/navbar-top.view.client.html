@@ -11,7 +11,8 @@
                 </div>
                 <div class="col-xs-8">
                     <div class="input-group">
-                        <input ng-model=" model.searchTerm" type="text" class="form-control">
+                        <input ng-keyup="$event.keyCode == 13 && model.search(searchText)"
+                               ng-model=" model.searchTerm" type="text" class="form-control">
                         <span class="input-group-btn">
                         <a href="#!/search?q={{model.searchTerm}}" class="btn btn-default" type="button">
                             <span class="glyphicon glyphicon-search"></span>

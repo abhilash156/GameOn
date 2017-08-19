@@ -19,8 +19,8 @@
                         </div>
                     </li>
                 </ul>
-                <div ng-hide="model.searchResult">
-                    <i>No Users Games the search query</i>
+                <div ng-hide="model.searchResult.length > 0">
+                    <i>No Games for the search query</i>
                 </div>
             </div>
             <div ng-show="model.loggedUser">
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
                 <div ng-hide="model.searchResultUsers.length > 0">
-
+                    <i>No Users found for the search query</i>
                 </div>
             </div>
         </div>

@@ -27,7 +27,6 @@ app.get("/api/user/:userId/liked/:gameId", isLiked);
 app.get("/api/user/:userId/owned", findOwnedGamesByUser);
 
 app.get("/api/user/:userId/inventory", getInventoryByUser);
-//app.post("/api/user/:userId/inventory", addInventory);
 app.delete("/api/user/:userId/inventory/:gameId", removeInventory);
 app.post("/api/user/:userId/inventory", upsertInventory);
 
@@ -410,19 +409,6 @@ function searchUsers(request, response) {
             response.sendStatus(404).error(error);
         });
 }
-
-/*function addInventory(request, response) {
-    var userId = request.params.userId;
-    var inventory = request.body;
-
-    userModel.addInventory(userId, inventory)
-        .then(function (users) {
-            response.send(users);
-        }, function (error) {
-            console.log(error);
-            response.sendStatus(404).error(error);
-        });
-}*/
 
 function removeInventory(request, response) {
     var userId = request.params.userId;
