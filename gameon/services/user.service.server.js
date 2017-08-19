@@ -25,7 +25,13 @@ app.delete("/api/user/:userId", deleteUser);
 app.get("/api/user/:userId/liked", findLikedGamesByUser);
 app.get("/api/user/:userId/liked/:gameId", isLiked);
 app.get("/api/user/:userId/owned", findOwnedGamesByUser);
+
 app.get("/api/user/:userId/inventory", getInventoryByUser);
+//app.post("/api/user/:userId/inventory", addInventory);
+app.delete("/api/user/:userId/inventory/:gameId", removeInventory);
+app.post("/api/user/:userId/inventory", upsertInventory);
+
+
 app.get("/api/user/:userId/owned/:gameId", isOwned);
 app.get("/api/user/:userId/following", getFollowing);
 app.get("/api/user/:userId/following/:userId2", isFollowing);
@@ -48,7 +54,7 @@ var googleConfig = {
     callbackURL: 'http://127.0.0.1:3030/google/callback'
 };
 
-if(process.env.GOOGLE_CLIENT_ID) {
+if (process.env.GOOGLE_CLIENT_ID) {
     googleConfig = {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -215,7 +221,7 @@ function findOwnedGamesByUser(request, response) {
 function getInventoryByUser(request, response) {
     var userId = request.params.userId;
 
-    userModel.findUserById(userId).populate("inventory")
+    userModel.findUserById(userId).populate('inventory._game')
         .exec()
         .then(function (user) {
             response.json(user.inventory);
@@ -401,6 +407,46 @@ function searchUsers(request, response) {
         }, function (error) {
             console.log(error);
 
+            response.sendStatus(404).error(error);
+        });
+}
+
+/*function addInventory(request, response) {
+    var userId = request.params.userId;
+    var inventory = request.body;
+
+    userModel.addInventory(userId, inventory)
+        .then(function (users) {
+            response.send(users);
+        }, function (error) {
+            console.log(error);
+            response.sendStatus(404).error(error);
+        });
+}*/
+
+function removeInventory(request, response) {
+    var userId = request.params.userId;
+    var gameId = request.params.gameId;
+
+    return userModel.removeInventory(userId, gameId)
+        .then(function () {
+            response.sendStatus(200);
+        }, function (error) {
+            console.log(error);
+            response.sendStatus(404).error(error);
+        });
+}
+
+function upsertInventory(request, response) {
+    var userId = request.params.userId;
+    var inventory = request.body;
+    console.log(inventory);
+
+    userModel.upsertInventory(userId, inventory)
+        .then(function (users) {
+            response.send(users);
+        }, function (error) {
+            console.log(error);
             response.sendStatus(404).error(error);
         });
 }

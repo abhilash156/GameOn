@@ -21,6 +21,9 @@ userModel.removeFollow = removeFollow;
 userModel.getAllUsers = getAllUsers;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.searchUsers = searchUsers;
+//userModel.addInventory = addInventory;
+userModel.removeInventory = removeInventory;
+userModel.upsertInventory = upsertInventory;
 
 module.exports = userModel;
 
@@ -45,19 +48,46 @@ function removeGame(userId, gameId) {
         });
 }
 
-function addInventory(userId, inventoryId) {
+/*function addInventory(userId, inventory) {
     return userModel.findById(userId)
         .then(function (user) {
-            user.inventory.push(inventoryId);
+            user.inventory.push(inventory);
             return user.save();
         })
-}
+}*/
 
-function removeInventory(userId, inventoryId) {
+function removeInventory(userId, gameId) {
     return userModel.findById(userId)
         .then(function (user) {
-            var index = user.inventory.indexOf(inventoryId);
+            var inventory = user.inventory;
+            var index = -1;
+            for (var i = 0; i < inventory.length; i++) {
+                if (inventory[i]._game == gameId) {
+                    index = i;
+                    break;
+                }
+            }
             user.inventory.splice(index, 1);
+            return user.save();
+        });
+}
+
+function upsertInventory(userId, updatedInventory) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            var inventory = user.inventory;
+            var index = -1;
+            for (var i = 0; i < inventory.length; i++) {
+                if (inventory[i]._game == updatedInventory._game) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index === -1) {
+                user.inventory.push(updatedInventory);
+            } else {
+                user.inventory[index] = updatedInventory;
+            }
             return user.save();
         });
 }

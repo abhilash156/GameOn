@@ -21,13 +21,25 @@
             "isFollowing": isFollowing,
             "isFollower": isFollower,
             "getUsers": getUsers,
-            "searchUsers": searchUsers
+            "searchUsers": searchUsers,
+            "upsertInventory": upsertInventory,
+            "removeInventory": removeInventory
         };
         return api;
 
+        function upsertInventory(userId, inventory) {
+            var url = "/api/user/" + userId + "/inventory";
+            return $http.post(url, inventory).then(successCallback, errorCallback);
+        }
+
+        function removeInventory(userId, gameId) {
+            var url = "/api/user/" + userId + "/inventory/" + gameId;
+
+            return $http.delete(url).then(successCallback, errorCallback);
+        }
+
         function createUser(user) {
             var url = "/api/user";
-
             return $http.post(url, user).then(successCallback, errorCallback);
         }
 
@@ -105,7 +117,6 @@
         function logout() {
             return $http.get("/api/logout").then(successCallback, errorCallback);
         }
-
 
         function followUser(userId, userId2) {
             var url = "/api/user/" + userId + "/follow/" + userId2;
